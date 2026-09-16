@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:e_commerce_app/core/resources/appcolors.dart';
 import 'package:e_commerce_app/core/resources/assets-manager.dart';
+import 'package:e_commerce_app/core/route-manager/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,6 +12,10 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(const Duration(seconds: 2), () {
+      if (!context.mounted) return; // حماية للـ context
+      Navigator.pushReplacementNamed(context,Routes.loginScreen);
+    });
     return Scaffold(
       backgroundColor: Appcolors.Primary,
       body: Stack(children: [
