@@ -1,6 +1,5 @@
 import 'package:e_commerce_app/core/route-manager/route-generator.dart';
 import 'package:e_commerce_app/core/route-manager/routes.dart';
-import 'package:e_commerce_app/features/spalash-screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
