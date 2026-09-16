@@ -1,4 +1,4 @@
 
 abstract class AppAssets{
-  static const String routeLogo = "lib/core/resources/assets-manager.dart";
+  static const String routeLogo = "assets/images/Group 11.png";
 }
