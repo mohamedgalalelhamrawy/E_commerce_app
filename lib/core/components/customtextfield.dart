@@ -15,9 +15,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
             controller: controller,
              validator: validator ,
               style: TextStyle(fontSize: 22.sp, color: Colors.black),
-              obscureText: false,
+              obscureText: obscureText ?? true,
               cursorColor: Colors.black,
               decoration: InputDecoration(
+                isDense: false,
                 suffixIcon: suffexicon ,
                 hint: Text(hint ?? ""),
                   hintStyle: getTextStyle(
@@ -27,7 +28,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
                   filled: true,
                   fillColor: Colors.white,
                   contentPadding:
-                      EdgeInsets.symmetric(vertical: 20.h, horizontal: 16),
+                      EdgeInsets.symmetric(vertical: 15.h, horizontal: 16),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.r),
                     borderSide:BorderSide.none),
