@@ -1,6 +1,6 @@
 import 'package:e_commerce_app/core/components/custombutton.dart';
 import 'package:e_commerce_app/core/components/customtextfield.dart';
-import 'package:e_commerce_app/core/constants.dart';
+import 'package:e_commerce_app/core/resources/constants.dart';
 import 'package:e_commerce_app/core/resources/appcolors.dart';
 import 'package:e_commerce_app/core/resources/appstyles.dart';
 import 'package:e_commerce_app/core/resources/assets-manager.dart';
@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 71.h,
                 width: 237.w,
                 AppAssets.routeLogo,
-                color: Colors.white, 
+                color: Colors.white,
               ),
             ),
             SizedBox(
@@ -119,23 +119,27 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 56.h,),
+            SizedBox(
+              height: 56.h,
+            ),
             CustomButton(text: Constants.login),
-             SizedBox(height: 32.h,),
-             Center(
-               child: TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, Routes.signUpScreen);
-                  },
-                  child: Text(
-                    Constants.dontHaveAccount,
-                    style: getTextStyle(
-                        color: Colors.white,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w500),
-                  ),
+            SizedBox(
+              height: 32.h,
+            ),
+            Center(
+              child: TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, Routes.signUpScreen);
+                },
+                child: Text(
+                  Constants.dontHaveAccount,
+                  style: getTextStyle(
+                      color: Colors.white,
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w500),
                 ),
-             ),
+              ),
+            ),
           ],
         ),
       ),

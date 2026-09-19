@@ -16,15 +16,12 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: Size(430, 932),
       builder: (context, child) {
-        return  MaterialApp(
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: RouteGenerator.getRoute,
-        initialRoute:Routes.splashScreen,
-
-      );
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          onGenerateRoute: RouteGenerator.getRoute,
+          initialRoute: Routes.splashScreen,
+        );
       },
-     
     );
   }
 }
-
