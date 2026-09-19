@@ -1,8 +1,10 @@
 import 'package:e_commerce_app/core/components/custombutton.dart';
 import 'package:e_commerce_app/core/components/customtextfield.dart';
+import 'package:e_commerce_app/core/constants.dart';
 import 'package:e_commerce_app/core/resources/appcolors.dart';
 import 'package:e_commerce_app/core/resources/appstyles.dart';
 import 'package:e_commerce_app/core/resources/assets-manager.dart';
+import 'package:e_commerce_app/core/route-manager/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -34,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 71.h,
                 width: 237.w,
                 AppAssets.routeLogo,
-                color: Colors.white, // 👈 اللون اللي محتاجه
+                color: Colors.white, 
               ),
             ),
             SizedBox(
@@ -42,14 +44,14 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             //////////////////////////////////////////
             Text(
-              "Welcome Back To Route",
+              Constants.welcomeBack,
               style: getTextStyle(
                   color: Colors.white,
                   fontSize: 24.sp,
                   fontWeight: FontWeight.w600),
             ),
             Text(
-              "Please sign in with your mail",
+              Constants.pleaseSignIn,
               style: getTextStyle(
                   color: Colors.white,
                   fontSize: 16.sp,
@@ -60,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             ////////////////////////////////////////
             Text(
-              "User Name",
+              Constants.userName,
               style: getTextStyle(
                   color: Colors.white,
                   fontSize: 18.sp,
@@ -70,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 24.h,
             ),
             CustomTextField(
-              hint: "enter your name",
+              hint: Constants.enterYourName,
               obscureText: false,
             ),
             SizedBox(
@@ -78,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             //////////////////////////////////////
             Text(
-              "Password",
+              Constants.password,
               style: getTextStyle(
                   color: Colors.white,
                   fontSize: 18.sp,
@@ -88,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 24.h,
             ),
             CustomTextField(
-              hint: "enter your password",
+              hint: Constants.enterYourPassword,
               obscureText: obscure,
               suffexicon: IconButton(
                 icon: obscure
@@ -108,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextButton(
                   onPressed: () {},
                   child: Text(
-                    "Forgot password",
+                    Constants.forgotPassword,
                     style: getTextStyle(
                         color: Colors.white,
                         fontSize: 18.sp,
@@ -118,13 +120,15 @@ class _LoginScreenState extends State<LoginScreen> {
               ],
             ),
             SizedBox(height: 56.h,),
-            CustomButton(text: "Login"),
+            CustomButton(text: Constants.login),
              SizedBox(height: 32.h,),
              Center(
                child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, Routes.signUpScreen);
+                  },
                   child: Text(
-                    "Don’t have an account? Create Account",
+                    Constants.dontHaveAccount,
                     style: getTextStyle(
                         color: Colors.white,
                         fontSize: 18.sp,
