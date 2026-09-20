@@ -129,7 +129,9 @@ class _SignUpState extends State<SignUp> {
               SizedBox(
                 height: 32.h,
               ),
-              CustomButton(text: Constants.signup),
+              CustomButton(
+                onpressed: (){},
+                text: Constants.signup),
               /////////////////////////////////////////
               SizedBox(
                 height: 16.h,
