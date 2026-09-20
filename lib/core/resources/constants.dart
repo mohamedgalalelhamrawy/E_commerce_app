@@ -17,4 +17,6 @@ class Constants {
   static const String enterYourEmailAdress = 'enter your email address';
   static const String signup = 'sign up';
   static const String alreadyHaveAccount = 'Already have an account? ';
+  static const String categories = "Categories";
+  static const String brands = "Brands";
 }
