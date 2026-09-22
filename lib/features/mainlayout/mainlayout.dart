@@ -18,7 +18,7 @@ class Mainlayout extends StatefulWidget {
 
 class _MainlayoutState extends State<Mainlayout> {
   int selectedIndex = 0;
-  List<Widget>  screens = [
+  List<Widget> screens = [
     HomeScreen(),
     ProuductsScreen(),
     CartScreen(),
@@ -74,6 +74,8 @@ class _MainlayoutState extends State<Mainlayout> {
         ),
       ),
       appBar: AppBar(
+        scrolledUnderElevation: 0,
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         title: SvgPicture.asset(
           AppAssets.routeLogoSvg,

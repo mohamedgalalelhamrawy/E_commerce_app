@@ -25,8 +25,8 @@ class HomeScreen extends StatelessWidget {
             Text(
               Constants.categories,
               style: getTextStyle(
-                  color: Appcolors.Primary,
-                  fontSize: 18.sp,
+                  color: Appcolors.darkPrimary,
+                  fontSize: 24.sp,
                   fontWeight: FontWeight.w500),
             ),
             SizedBox(
@@ -59,8 +59,8 @@ class HomeScreen extends StatelessWidget {
             Text(
               Constants.brands,
               style: getTextStyle(
-                  color: Appcolors.Primary,
-                  fontSize: 18.sp,
+                  color: Appcolors.darkPrimary,
+                  fontSize: 24.sp,
                   fontWeight: FontWeight.w500),
             ),
             SizedBox(

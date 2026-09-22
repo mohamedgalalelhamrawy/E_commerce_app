@@ -19,4 +19,5 @@ class Constants {
   static const String alreadyHaveAccount = 'Already have an account? ';
   static const String categories = "Categories";
   static const String brands = "Brands";
+  static const String review = "Review";
 }
