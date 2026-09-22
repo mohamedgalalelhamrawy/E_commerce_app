@@ -7,14 +7,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Customproductsitem extends StatefulWidget {
-  Customproductsitem({super.key});
-
+   Customproductsitem({super.key});
   @override
   State<Customproductsitem> createState() => _CustomproductsitemState();
 }
 
 class _CustomproductsitemState extends State<Customproductsitem> {
   bool isfavorite = false;
+  
   @override
   Widget build(BuildContext context) {
     return Container(

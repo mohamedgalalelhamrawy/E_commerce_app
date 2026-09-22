@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/core/components/customproductsitem.dart';
+import 'package:e_commerce_app/core/route-manager/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,9 +14,14 @@ class ProuductsScreen extends StatelessWidget {
         child: GridView.builder(
           itemCount: 20,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, crossAxisSpacing: 16.w,mainAxisSpacing: 16,childAspectRatio :0.85),
+                crossAxisCount: 2, crossAxisSpacing: 16.w,mainAxisSpacing: 16,childAspectRatio :0.72),
             itemBuilder: (context, index) {
-              return Customproductsitem();
+              return GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, Routes.productDetailsScreen);
+                },
+                child:  Customproductsitem(),
+              );
             },),
       ),
     );
