@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomCarouselSlider(imgList: advsList),
+            CustomCarouselSlider(height: 200.h,imgList: advsList),
             SizedBox(
               height: 16.h,
             ),

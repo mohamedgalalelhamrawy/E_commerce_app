@@ -5,8 +5,9 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CustomCarouselSlider extends StatefulWidget {
 final List<String> imgList ;
-
- CustomCarouselSlider({super.key, required this.imgList});
+ bool isNetwork ;
+ double height;
+ CustomCarouselSlider({super.key, required this.imgList,required this.height,this.isNetwork = false});
 
   @override
   State<CustomCarouselSlider> createState() => _CustomCarouselSliderState();
@@ -15,7 +16,7 @@ final List<String> imgList ;
 class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
   // 1. المتغير اللي بيحفظ رقم الصورة الشغالة حالياً
   int activeIndex = 0; 
-
+   
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -27,7 +28,13 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
           itemBuilder: (context, index, realIndex) {
             return ClipRRect(
               borderRadius: BorderRadius.circular(15),
-              child: Image.asset(
+              child: widget.isNetwork ?  
+              Image.network(
+                widget.imgList[index],
+                fit: BoxFit.cover,
+                width: double.infinity,
+              )
+              : Image.asset(
                 widget.imgList[index],
                 fit: BoxFit.cover,
                 width: double.infinity,
@@ -35,7 +42,7 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
             );
           },
           options: CarouselOptions(
-            height: 200,
+            height: widget.height,
             autoPlay: true, // يقلب لوحده
             viewportFraction: 1.0, // الصورة تاخد العرض كامل
             // 👈 هنا مربط الفرس: كل ما الصورة تتغير بنحدث الـ activeIndex
