@@ -1,5 +1,5 @@
-import 'package:e_commerce_app/core/components/custombutton.dart';
-import 'package:e_commerce_app/core/components/customtextfield.dart';
+import 'package:e_commerce_app/features/auth/widgets/custombutton.dart';
+import 'package:e_commerce_app/features/auth/widgets/customtextfield.dart';
 import 'package:e_commerce_app/core/resources/appcolors.dart';
 import 'package:e_commerce_app/core/resources/appstyles.dart';
 import 'package:e_commerce_app/core/resources/assets-manager.dart';

@@ -1,8 +1,8 @@
-import 'package:e_commerce_app/core/components/colorselector.dart';
+import 'package:e_commerce_app/features/productdetails.dart/widgets/colorselector.dart';
 import 'package:e_commerce_app/core/components/customcarouselslider.dart';
 import 'package:e_commerce_app/core/components/productcounter.dart';
 import 'package:e_commerce_app/core/components/readmore.dart';
-import 'package:e_commerce_app/core/components/sizeselector.dart';
+import 'package:e_commerce_app/features/productdetails.dart/widgets/sizeselector.dart';
 import 'package:e_commerce_app/core/resources/appcolors.dart';
 import 'package:e_commerce_app/core/resources/appstyles.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:e_commerce_app/core/components/bottonnavitem.dart';
+import 'package:e_commerce_app/features/mainlayout/widgets/bottonnavitem.dart';
 import 'package:e_commerce_app/core/resources/appcolors.dart';
 import 'package:e_commerce_app/core/resources/assets-manager.dart';
 import 'package:e_commerce_app/features/mainlayout/cart/cart.dart';

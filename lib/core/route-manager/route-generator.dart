@@ -1,9 +1,10 @@
 import 'package:e_commerce_app/core/route-manager/routes.dart';
 import 'package:e_commerce_app/features/auth/login/login.dart';
 import 'package:e_commerce_app/features/auth/register/signup.dart';
+import 'package:e_commerce_app/features/mainlayout/cart/cart.dart';
 import 'package:e_commerce_app/features/mainlayout/mainlayout.dart';
-import 'package:e_commerce_app/features/mainlayout/proudcts/productdetails.dart/productdetails.dart';
-import 'package:e_commerce_app/features/spalash-screen.dart';
+import 'package:e_commerce_app/features/productdetails.dart/productdetails.dart';
+import 'package:e_commerce_app/features/splash/spalash-screen.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {
@@ -19,6 +20,8 @@ class RouteGenerator {
       return MaterialPageRoute(builder: (_) => SignUp());
       case Routes.productDetailsScreen :
       return MaterialPageRoute(builder: (_) => ProductDetails());
+      case Routes.cartscreen :
+      return MaterialPageRoute(builder: (_) => CartScreen());
       default: undefinedRoute();
     }
   }
