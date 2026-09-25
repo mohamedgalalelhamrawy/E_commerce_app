@@ -44,7 +44,7 @@ class _ProductCounterState extends State<ProductCounter> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
       decoration: BoxDecoration(
         color: Appcolors.Primary, // لون الفيجما الكحلي
         borderRadius: BorderRadius.circular(20.r),

@@ -1,9 +1,13 @@
+import 'package:e_commerce_app/core/components/colorselector.dart';
 import 'package:e_commerce_app/core/components/customcarouselslider.dart';
 import 'package:e_commerce_app/core/components/productcounter.dart';
+import 'package:e_commerce_app/core/components/readmore.dart';
+import 'package:e_commerce_app/core/components/sizeselector.dart';
 import 'package:e_commerce_app/core/resources/appcolors.dart';
 import 'package:e_commerce_app/core/resources/appstyles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:readmore_flutter/readmore_flutter.dart';
 
 class ProductDetails extends StatelessWidget {
   ProductDetails({super.key});
@@ -28,6 +32,7 @@ class ProductDetails extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               child: CustomCarouselSlider(
@@ -97,7 +102,54 @@ class ProductDetails extends StatelessWidget {
                   },
                 )
               ],
-            )
+            ),
+            SizedBox(
+              height: 16.h,
+            ),
+            Text(
+              "Description",
+              style: getTextStyle(
+                  color: Appcolors.darkPrimary,
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w500),
+            ),
+            SizedBox(
+              height: 8.h,
+            ),
+            CustomReadMore(
+                text:
+                    "Prepared by experienced English teachers, the texts, articles and conversations are brief and appropriate to your level of proficiency. Take the multiple-choice quiz following each text, and you'll get the results immediately. You will feel both challenged and accomplished! You can even download (as PDF) and print the texts and exercises. It's enjoyable, fun and free. Good luck!"),
+            SizedBox(
+              height: 16.h,
+            ),
+            Text(
+              "Size ",
+              style: getTextStyle(
+                  color: Appcolors.darkPrimary,
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w500),
+            ),
+            SizedBox(
+              height: 8.h,
+            ),
+            Sizeselector(sizes: ["38", "39", "40", "41", "42"]),
+            SizedBox(
+              height: 16.h,
+            ),
+            Text(
+              "Size ",
+              style: getTextStyle(
+                  color: Appcolors.darkPrimary,
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w500),
+            ),
+            Colorselector(colorsList: [
+              Color(0xFF2C2C2C),
+              Color(0xFFBC341A),
+              Color(0xFF0973E8),
+              Color(0xFF00AB41),
+              Color(0xFFFF6B6B),
+            ])
           ],
         ),
       ),
