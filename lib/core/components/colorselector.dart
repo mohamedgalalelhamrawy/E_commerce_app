@@ -15,8 +15,7 @@ class Colorselector extends StatefulWidget {
   bool isSelected = false ;
    @override
    Widget build(BuildContext context) {
-     return Container(
-      child: Row(
+     return  Row(
         children: List.generate(
           widget.colorsList.length,
           (index) {
@@ -46,7 +45,7 @@ class Colorselector extends StatefulWidget {
             );
           },
         ),
-      ),
-    );;
+      );
+    
    }
  }

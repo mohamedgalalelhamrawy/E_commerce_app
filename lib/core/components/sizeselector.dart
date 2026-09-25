@@ -16,8 +16,7 @@ class _SizeselectorState extends State<Sizeselector> {
   bool isSelected = false;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
+    return  Row(
         children: List.generate(
           widget.sizes.length,
           (index) {
@@ -48,7 +47,6 @@ class _SizeselectorState extends State<Sizeselector> {
             );
           },
         ),
-      ),
-    );
+      );
   }
 }

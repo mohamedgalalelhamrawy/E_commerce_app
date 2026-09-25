@@ -14,7 +14,7 @@ class ProuductsScreen extends StatelessWidget {
         child: GridView.builder(
           itemCount: 20,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, crossAxisSpacing: 16.w,mainAxisSpacing: 16,childAspectRatio :0.72),
+                crossAxisCount: 2, crossAxisSpacing: 16.w,mainAxisSpacing: 16,childAspectRatio :0.81),
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {

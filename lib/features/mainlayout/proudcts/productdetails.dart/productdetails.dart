@@ -29,128 +29,191 @@ class ProductDetails extends StatelessWidget {
               fontWeight: FontWeight.w500),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              child: CustomCarouselSlider(
-                  height: 300.h, isNetwork: true, imgList: networkList),
-            ),
-            SizedBox(
-              height: 24.h,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Nike Air Jordon",
-                  style: getTextStyle(
-                      color: Appcolors.darkPrimary,
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w500),
-                ),
-                Text(
-                  "EGP 3,500",
-                  style: getTextStyle(
-                      color: Appcolors.darkPrimary,
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w500),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 16.h,
-            ),
-            Row(
-              children: [
-                Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-                  margin: EdgeInsets.only(right: 16.w),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.r),
-                      border: Border.all(width: 1.r, color: Colors.grey)),
-                  child: Text(
-                    "3,230 Sold",
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                child: CustomCarouselSlider(
+                    height: 300.h, isNetwork: true, imgList: networkList),
+              ),
+              SizedBox(
+                height: 24.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Nike Air Jordon",
+                    style: getTextStyle(
+                        color: Appcolors.darkPrimary,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  Text(
+                    "EGP 3,500",
+                    style: getTextStyle(
+                        color: Appcolors.darkPrimary,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w500),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 16.h,
+              ),
+              Row(
+                children: [
+                  Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                    margin: EdgeInsets.only(right: 16.w),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20.r),
+                        border: Border.all(width: 1.r, color: Colors.grey)),
+                    child: Text(
+                      "3,230 Sold",
+                      style: getTextStyle(
+                          color: Appcolors.darkPrimary,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  Icon(
+                    Icons.star,
+                    color: Colors.yellow,
+                  ),
+                  SizedBox(
+                    width: 4.w,
+                  ),
+                  Text(
+                    "4.8 (7,500)",
                     style: getTextStyle(
                         color: Appcolors.darkPrimary,
                         fontSize: 14.sp,
-                        fontWeight: FontWeight.w500),
+                        fontWeight: FontWeight.w400),
                   ),
-                ),
-                Icon(
-                  Icons.star,
-                  color: Colors.yellow,
-                ),
-                SizedBox(
-                  width: 4.w,
-                ),
-                Text(
-                  "4.8 (7,500)",
-                  style: getTextStyle(
-                      color: Appcolors.darkPrimary,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400),
-                ),
-                Spacer(),
-                ProductCounter(
-                  initialValue: 1,
-                  onChanged: (newCount) {
-                    // قيمة الـ count الجديدة لما يزيد أو ينقص
-                  },
-                )
-              ],
-            ),
-            SizedBox(
-              height: 16.h,
-            ),
-            Text(
-              "Description",
-              style: getTextStyle(
-                  color: Appcolors.darkPrimary,
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w500),
-            ),
-            SizedBox(
-              height: 8.h,
-            ),
-            CustomReadMore(
-                text:
-                    "Prepared by experienced English teachers, the texts, articles and conversations are brief and appropriate to your level of proficiency. Take the multiple-choice quiz following each text, and you'll get the results immediately. You will feel both challenged and accomplished! You can even download (as PDF) and print the texts and exercises. It's enjoyable, fun and free. Good luck!"),
-            SizedBox(
-              height: 16.h,
-            ),
-            Text(
-              "Size ",
-              style: getTextStyle(
-                  color: Appcolors.darkPrimary,
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w500),
-            ),
-            SizedBox(
-              height: 8.h,
-            ),
-            Sizeselector(sizes: ["38", "39", "40", "41", "42"]),
-            SizedBox(
-              height: 16.h,
-            ),
-            Text(
-              "Size ",
-              style: getTextStyle(
-                  color: Appcolors.darkPrimary,
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w500),
-            ),
-            Colorselector(colorsList: [
-              Color(0xFF2C2C2C),
-              Color(0xFFBC341A),
-              Color(0xFF0973E8),
-              Color(0xFF00AB41),
-              Color(0xFFFF6B6B),
-            ])
-          ],
+                  Spacer(),
+                  ProductCounter(
+                    initialValue: 1,
+                    onChanged: (newCount) {
+                      // قيمة الـ count الجديدة لما يزيد أو ينقص
+                    },
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 16.h,
+              ),
+              Text(
+                "Description",
+                style: getTextStyle(
+                    color: Appcolors.darkPrimary,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w500),
+              ),
+              SizedBox(
+                height: 8.h,
+              ),
+              CustomReadMore(
+                  text:
+                      "Prepared by experienced English teachers, the texts, articles and conversations are brief and appropriate to your level of proficiency. Take the multiple-choice quiz following each text, and you'll get the results immediately. You will feel both challenged and accomplished! You can even download (as PDF) and print the texts and exercises. It's enjoyable, fun and free. Good luck!"),
+              SizedBox(
+                height: 16.h,
+              ),
+              Text(
+                "Size ",
+                style: getTextStyle(
+                    color: Appcolors.darkPrimary,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w500),
+              ),
+              SizedBox(
+                height: 8.h,
+              ),
+              Sizeselector(sizes: ["38", "39", "40", "41", "42"]),
+              SizedBox(
+                height: 16.h,
+              ),
+              Text(
+                "Colors",
+                style: getTextStyle(
+                    color: Appcolors.darkPrimary,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w500),
+              ),
+              SizedBox(
+                height: 8.h,
+              ),
+              Colorselector(colorsList: [
+                Color(0xFF2C2C2C),
+                Color(0xFFBC341A),
+                Color(0xFF0973E8),
+                Color(0xFF00AB41),
+                Color(0xFFFF6B6B),
+              ]),
+              SizedBox(
+                height: 48.h,
+              ),
+              Row(
+                children: [
+                  Column(
+                    children: [
+                      Text(
+                        "Total price",
+                        style: getTextStyle(
+                            color: Appcolors.Primary.withOpacity(0.6),
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      Text(
+                        "EGP 3,500",
+                        style: getTextStyle(
+                            color: Appcolors.darkPrimary,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500),
+                      )
+                    ],
+                  ),
+                  Spacer(),
+                  Container(
+                    width: 270.w,
+                    height: 48.h,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 40.w, vertical: 5.h),
+                    decoration: BoxDecoration(
+                        color: Appcolors.Primary,
+                        borderRadius: BorderRadius.all(Radius.circular(20.r))),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.add_shopping_cart,
+                          color: Colors.white,
+                          size: 21.sp,
+                        ),
+                        SizedBox(
+                          width: 20.w,
+                        ),
+                        Text(
+                          "Add to cart",
+                          style: getTextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(height: 24.h)
+            ],
+          ),
         ),
       ),
     );
