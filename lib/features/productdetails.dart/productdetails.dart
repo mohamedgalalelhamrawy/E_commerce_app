@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/core/resources/constants.dart';
 import 'package:e_commerce_app/features/productdetails.dart/widgets/colorselector.dart';
 import 'package:e_commerce_app/core/components/customcarouselslider.dart';
 import 'package:e_commerce_app/core/components/productcounter.dart';
@@ -7,7 +8,6 @@ import 'package:e_commerce_app/core/resources/appcolors.dart';
 import 'package:e_commerce_app/core/resources/appstyles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:readmore_flutter/readmore_flutter.dart';
 
 class ProductDetails extends StatelessWidget {
   ProductDetails({super.key});
@@ -23,10 +23,7 @@ class ProductDetails extends StatelessWidget {
         centerTitle: true,
         title: Text(
           "Product Details",
-          style: getTextStyle(
-              color: Appcolors.darkPrimary,
-              fontSize: 20.sp,
-              fontWeight: FontWeight.w500),
+          style:Appstyles.font20darkprimaryBold
         ),
       ),
       body: SingleChildScrollView(
@@ -47,17 +44,11 @@ class ProductDetails extends StatelessWidget {
                 children: [
                   Text(
                     "Nike Air Jordon",
-                    style: getTextStyle(
-                        color: Appcolors.darkPrimary,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w500),
+                    style: Appstyles.font18darkprimaryBold,
                   ),
                   Text(
                     "EGP 3,500",
-                    style: getTextStyle(
-                        color: Appcolors.darkPrimary,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w500),
+                   style: Appstyles.font18darkprimaryBold,
                   )
                 ],
               ),
@@ -75,10 +66,7 @@ class ProductDetails extends StatelessWidget {
                         border: Border.all(width: 1.r, color: Colors.grey)),
                     child: Text(
                       "3,230 Sold",
-                      style: getTextStyle(
-                          color: Appcolors.darkPrimary,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500),
+                      style: Appstyles.font14darkprimaryBold
                     ),
                   ),
                   Icon(
@@ -90,10 +78,7 @@ class ProductDetails extends StatelessWidget {
                   ),
                   Text(
                     "4.8 (7,500)",
-                    style: getTextStyle(
-                        color: Appcolors.darkPrimary,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400),
+                    style:Appstyles.font14darkprimary
                   ),
                   Spacer(),
                   ProductCounter(
@@ -108,11 +93,8 @@ class ProductDetails extends StatelessWidget {
                 height: 16.h,
               ),
               Text(
-                "Description",
-                style: getTextStyle(
-                    color: Appcolors.darkPrimary,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500),
+                Constants.describtion,
+                style: Appstyles.font18darkprimaryBold,
               ),
               SizedBox(
                 height: 8.h,
@@ -124,11 +106,8 @@ class ProductDetails extends StatelessWidget {
                 height: 16.h,
               ),
               Text(
-                "Size ",
-                style: getTextStyle(
-                    color: Appcolors.darkPrimary,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500),
+               Constants.size,
+                style: Appstyles.font18darkprimaryBold,
               ),
               SizedBox(
                 height: 8.h,
@@ -138,11 +117,8 @@ class ProductDetails extends StatelessWidget {
                 height: 16.h,
               ),
               Text(
-                "Colors",
-                style: getTextStyle(
-                    color: Appcolors.darkPrimary,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500),
+                Constants.color,
+                style:Appstyles.font18darkprimaryBold
               ),
               SizedBox(
                 height: 8.h,
@@ -164,7 +140,7 @@ class ProductDetails extends StatelessWidget {
                     Column(
                       children: [
                         Text(
-                          "Total price",
+                          Constants.totalPrice,
                           style: getTextStyle(
                               color: Appcolors.Primary.withOpacity(0.6),
                               fontSize: 18,
@@ -175,10 +151,7 @@ class ProductDetails extends StatelessWidget {
                         ),
                         Text(
                           "EGP 3,500",
-                          style: getTextStyle(
-                              color: Appcolors.darkPrimary,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500),
+                          style: Appstyles.font18darkprimaryBold,
                         )
                       ],
                     ),
@@ -202,11 +175,8 @@ class ProductDetails extends StatelessWidget {
                             width: 20.w,
                           ),
                           Text(
-                            "Add to cart",
-                            style: getTextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500),
+                            Constants.addtocart,
+                            style:Appstyles.font20WhiteBold,
                           ),
                         ],
                       ),

@@ -15,10 +15,7 @@ class Cartshoppingscreen extends StatelessWidget {
         centerTitle: true,
         title: Text(
           "Cart",
-          style: getTextStyle(
-              color: Appcolors.darkPrimary,
-              fontSize: 20.sp,
-              fontWeight: FontWeight.w500),
+          style: Appstyles.font18darkprimaryBold,
         ),
       ),
       body: Padding(
@@ -31,8 +28,7 @@ class Cartshoppingscreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Cartitem(
                     color: Colors.red,
-                    img:
-                        "https://www.divanostores.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-22-at-1.24.21-PM.jpeg",
+                    img: "https://www.divanostores.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-22-at-1.24.21-PM.jpeg",
                     prodName: "Nike Air Jordon",
                     size: "41",
                     totalprice: "EGP 3,500",
@@ -58,10 +54,7 @@ class Cartshoppingscreen extends StatelessWidget {
                       ),
                       Text(
                         "EGP 3,500",
-                        style: getTextStyle(
-                            color: Appcolors.darkPrimary,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500),
+                        style: Appstyles.font18darkprimaryBold,
                       )
                     ],
                   ),
@@ -78,10 +71,7 @@ class Cartshoppingscreen extends StatelessWidget {
                       children: [
                         Text(
                           "Check Out",
-                          style: getTextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500),
+                          style: Appstyles.font20WhiteBold,
                         ),
                         SizedBox(
                           width: 20.w,

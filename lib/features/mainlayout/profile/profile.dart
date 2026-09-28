@@ -15,11 +15,7 @@ class ProfileScreen extends StatelessWidget {
         child: Column(
            crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-          Text("Welcome, Mohamed",style: getTextStyle( 
-            color: Appcolors.darkPrimary,
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w500
-          ),),
+          Text("Welcome, Mohamed",style:  Appstyles.font18darkprimaryBold,),
           SizedBox(height: 8.h,),
           Text("mohamed.G@gmail.com",style: getTextStyle( 
             color: Appcolors.opacityDarkblue,

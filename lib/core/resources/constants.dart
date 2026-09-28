@@ -20,4 +20,11 @@ class Constants {
   static const String categories = "Categories";
   static const String brands = "Brands";
   static const String review = "Review";
+  static const String describtion = "Description";
+  static const String size =  "Size ";  
+  static const String color =  "Colors";  
+  static const String totalPrice =  "Total price";
+  static const String addtocart =  "Add to cart";
+  
+
 }

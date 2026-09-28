@@ -30,11 +30,7 @@ class CustomTextField extends StatelessWidget {
         isDense: false,
         suffixIcon: suffexicon,
         hint: Text(hint ?? ""),
-        hintStyle: getTextStyle(
-          color: Colors.grey,
-          fontSize: 20.sp,
-          fontWeight: FontWeight.w300,
-        ),
+        hintStyle: Appstyles.hintAuthTextfield,
         filled: true,
         fillColor: Colors.white,
         contentPadding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16),

@@ -74,37 +74,24 @@ class _CustomproductsitemState extends State<Customproductsitem> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("Nike air jordon",
-                    style: getTextStyle(
-                        color: Appcolors.darkPrimary,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400)),
+                    style: Appstyles.font14darkprimary),
                 Text(
                     "Nike shoes for playing football with your friends at home",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: getTextStyle(
-                        color: Appcolors.darkPrimary,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400)),
+                    style: Appstyles.font14darkprimary),
                 SizedBox(
                   height: 8.h,
                 ),
                 Row(
                   children: [
                     Text("EGP 1,100",
-                        style: getTextStyle(
-                            color: Appcolors.darkPrimary,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w400)),
+                        style:Appstyles.font16darkprimary),
                     SizedBox(
                       width: 16.w,
                     ),
                     Text("EGP 1,500",
-                        style: TextStyle(
-                            decoration: TextDecoration.lineThrough,
-                            fontSize: 14.sp,
-                            color: Appcolors.opacityblue,
-                            fontWeight: FontWeight.w500)),
+                        style: Appstyles.underLinePrice),
                   ],
                 ),
                 SizedBox(
@@ -116,17 +103,11 @@ class _CustomproductsitemState extends State<Customproductsitem> {
                     Row(
                       children: [
                         Text(Constants.review,
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              color: Appcolors.darkPrimary,
-                            )),
+                            style:Appstyles.font14darkprimary),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 2.w),
                           child: Text("(4.5)",
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Appcolors.darkPrimary,
-                              )),
+                              style:Appstyles.font14darkprimary),
                         ),
                         Icon(
                           Icons.star,

@@ -25,7 +25,7 @@ class CustomCategoryItem extends StatelessWidget {
           padding: EdgeInsets.only(top: 6.h),
           child: Text(
             text,
-            style: getTextStyle(color: Appcolors.Primary, fontSize: 18.sp),
+            style: Appstyles.hometexts,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),

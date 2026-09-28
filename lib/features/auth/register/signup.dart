@@ -45,10 +45,7 @@ class _SignUpState extends State<SignUp> {
               ////////////////////////////////////////////// full name
               Text(
                 Constants.fullName,
-                style: getTextStyle(
-                    color: Colors.white,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500),
+                style: Appstyles.authHeaders,
               ),
               SizedBox(
                 height: 24.h,
@@ -63,10 +60,7 @@ class _SignUpState extends State<SignUp> {
               ///////////////////////////////////////////// mobile number
               Text(
                 Constants.mobileNumber,
-                style: getTextStyle(
-                    color: Colors.white,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500),
+                style:Appstyles.authHeaders,
               ),
               SizedBox(
                 height: 24.h,
@@ -82,10 +76,7 @@ class _SignUpState extends State<SignUp> {
               ///////////////////////////////////////////////// E-mail address
               Text(
                 Constants.emailaddress,
-                style: getTextStyle(
-                    color: Colors.white,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500),
+                style: Appstyles.authHeaders
               ),
               SizedBox(
                 height: 24.h,
@@ -100,10 +91,7 @@ class _SignUpState extends State<SignUp> {
               //////////////////////////////////////////////// password
               Text(
                 Constants.password,
-                style: getTextStyle(
-                    color: Colors.white,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500),
+                style: Appstyles.authHeaders
               ),
               SizedBox(
                 height: 24.h,
@@ -143,10 +131,7 @@ class _SignUpState extends State<SignUp> {
                   },
                   child: Text(
                     Constants.alreadyHaveAccount,
-                    style: getTextStyle(
-                        color: Colors.white,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w500),
+                    style: Appstyles.authHeaders
                   ),
                 ),
               ),

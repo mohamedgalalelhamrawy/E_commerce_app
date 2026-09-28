@@ -49,10 +49,7 @@ class Cartitem extends StatelessWidget {
                                 children: [
                                   Text(
                                    prodName ,
-                                    style: getTextStyle(
-                                        color: Appcolors.darkPrimary,
-                                        fontSize: 18.sp,
-                                        fontWeight: FontWeight.w500),
+                                    style: Appstyles.font18darkprimaryBold,
                                   ),
                                   GestureDetector(
                                     onTap: delete ,
@@ -90,10 +87,7 @@ class Cartitem extends StatelessWidget {
                                 children: [
                                   Text(
                                     totalprice,
-                                    style: getTextStyle(
-                                        color: Appcolors.darkPrimary,
-                                        fontSize: 18.sp,
-                                        fontWeight: FontWeight.w500),
+                                    style: Appstyles.font18darkprimaryBold,
                                   ),
                                   ProductCounter()
                                 ],

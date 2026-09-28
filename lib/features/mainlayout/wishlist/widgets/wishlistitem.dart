@@ -61,10 +61,7 @@ class _WishListItemState extends State<WishListItem> {
                         children: [
                           Text(
                             widget.prodName,
-                            style: getTextStyle(
-                                color: Appcolors.darkPrimary,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.w500),
+                            style: Appstyles.font18darkprimaryBold,
                           ),
                           GestureDetector(
                             onTap: widget.favorite,
@@ -121,10 +118,7 @@ class _WishListItemState extends State<WishListItem> {
                         children: [
                           Text(
                             widget.totalprice,
-                            style: getTextStyle(
-                                color: Appcolors.darkPrimary,
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.w500),
+                            style: Appstyles.font18darkprimaryBold,
                           ),
                           SizedBox(width: 8.w,),
                           Text("EGP 1,500",
@@ -147,10 +141,7 @@ class _WishListItemState extends State<WishListItem> {
                               onPressed: () {},
                               child: Text(
                                 "Add to Cart",
-                                style: getTextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w500),
+                                style: Appstyles.font14WhiteBold
                               ))
                         ],
                       )

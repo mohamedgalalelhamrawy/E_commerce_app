@@ -46,17 +46,11 @@ class _LoginScreenState extends State<LoginScreen> {
               //////////////////////////////////////////
               Text(
                 Constants.welcomeBack,
-                style: getTextStyle(
-                    color: Colors.white,
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.w600),
+                style: Appstyles.authMainHeaders1
               ),
               Text(
                 Constants.pleaseSignIn,
-                style: getTextStyle(
-                    color: Colors.white,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w300),
+                style: Appstyles.subAuthMainHeaders1
               ),
               SizedBox(
                 height: 40.h,
@@ -64,10 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ////////////////////////////////////////
               Text(
                 Constants.userName,
-                style: getTextStyle(
-                    color: Colors.white,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500),
+                style: Appstyles.authHeaders
               ),
               SizedBox(
                 height: 24.h,
@@ -82,10 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
               //////////////////////////////////////
               Text(
                 Constants.password,
-                style: getTextStyle(
-                    color: Colors.white,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500),
+                style: Appstyles.authHeaders,
               ),
               SizedBox(
                 height: 24.h,
@@ -138,10 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   child: Text(
                     Constants.dontHaveAccount,
-                    style: getTextStyle(
-                        color: Colors.white,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w500),
+                    style: Appstyles.authHeaders
                   ),
                 ),
               ),

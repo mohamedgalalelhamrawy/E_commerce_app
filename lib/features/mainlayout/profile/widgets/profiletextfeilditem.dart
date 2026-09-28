@@ -32,10 +32,7 @@ class _ProfileTextFeildState extends State<ProfileTextFeild> {
       children: [
         Text(
           widget.text,
-          style: getTextStyle(
-              color: Appcolors.darkPrimary,
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w500),
+          style: Appstyles.font18darkprimaryBold,
         ),
         SizedBox(
           height: 16.h,
@@ -44,13 +41,7 @@ class _ProfileTextFeildState extends State<ProfileTextFeild> {
           scrollPadding: EdgeInsets.zero, // 👈 يمنع السكرول الداخلي
           clipBehavior: Clip.hardEdge,
           maxLines: 1,
-          style: getTextStyle(
-                  color: Appcolors.darkPrimary,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500)
-              .copyWith(
-            overflow: TextOverflow.ellipsis,
-          ),
+          style:  Appstyles.font14darkprimaryBold.copyWith(overflow: TextOverflow.ellipsis),
           focusNode: passwordFocusNode,
           obscuringCharacter: '*',
           obscureText: widget.obscuretext,
