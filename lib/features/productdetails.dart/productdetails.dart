@@ -157,59 +157,62 @@ class ProductDetails extends StatelessWidget {
               SizedBox(
                 height: 48.h,
               ),
-              Row(
-                children: [
-                  Column(
-                    children: [
-                      Text(
-                        "Total price",
-                        style: getTextStyle(
-                            color: Appcolors.Primary.withOpacity(0.6),
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      SizedBox(
-                        height: 8.h,
-                      ),
-                      Text(
-                        "EGP 3,500",
-                        style: getTextStyle(
-                            color: Appcolors.darkPrimary,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500),
-                      )
-                    ],
-                  ),
-                  Spacer(),
-                  Container(
-                    width: 270.w,
-                    height: 48.h,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 40.w, vertical: 5.h),
-                    decoration: BoxDecoration(
-                        color: Appcolors.Primary,
-                        borderRadius: BorderRadius.all(Radius.circular(20.r))),
-                    child: Row(
+              SizedBox(
+                height: 90,
+                child: Row(
+                  children: [
+                    Column(
                       children: [
-                        Icon(
-                          Icons.add_shopping_cart,
-                          color: Colors.white,
-                          size: 21.sp,
-                        ),
-                        SizedBox(
-                          width: 20.w,
-                        ),
                         Text(
-                          "Add to cart",
+                          "Total price",
                           style: getTextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
+                              color: Appcolors.Primary.withOpacity(0.6),
+                              fontSize: 18,
                               fontWeight: FontWeight.w500),
                         ),
+                        SizedBox(
+                          height: 8.h,
+                        ),
+                        Text(
+                          "EGP 3,500",
+                          style: getTextStyle(
+                              color: Appcolors.darkPrimary,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500),
+                        )
                       ],
                     ),
-                  )
-                ],
+                    Spacer(),
+                    Container(
+                      width: 270.w,
+                      height: 48.h,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 40.w, vertical: 5.h),
+                      decoration: BoxDecoration(
+                          color: Appcolors.Primary,
+                          borderRadius: BorderRadius.all(Radius.circular(20.r))),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.add_shopping_cart,
+                            color: Colors.white,
+                            size: 21.sp,
+                          ),
+                          SizedBox(
+                            width: 20.w,
+                          ),
+                          Text(
+                            "Add to cart",
+                            style: getTextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
               SizedBox(height: 24.h)
             ],

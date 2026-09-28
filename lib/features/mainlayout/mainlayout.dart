@@ -1,7 +1,8 @@
+import 'package:e_commerce_app/core/route-manager/routes.dart';
 import 'package:e_commerce_app/features/mainlayout/widgets/bottonnavitem.dart';
 import 'package:e_commerce_app/core/resources/appcolors.dart';
 import 'package:e_commerce_app/core/resources/assets-manager.dart';
-import 'package:e_commerce_app/features/mainlayout/cart/cart.dart';
+import 'package:e_commerce_app/features/mainlayout/wishlist/wishlist.dart';
 import 'package:e_commerce_app/features/mainlayout/home.dart/home.dart';
 import 'package:e_commerce_app/features/mainlayout/profile/profile.dart';
 import 'package:e_commerce_app/features/mainlayout/proudcts/products.dart';
@@ -21,7 +22,7 @@ class _MainlayoutState extends State<Mainlayout> {
   List<Widget> screens = [
     HomeScreen(),
     ProuductsScreen(),
-    CartScreen(),
+    WishlistScreen (),
     ProfileScreen()
   ];
   @override
@@ -74,6 +75,17 @@ class _MainlayoutState extends State<Mainlayout> {
         ),
       ),
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, Routes.cartShopscreen);
+              },
+              icon: Icon(
+                Icons.shopping_cart,
+                size: 24.sp,
+                color: Appcolors.Primary,
+              ))
+        ],
         scrolledUnderElevation: 0,
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
