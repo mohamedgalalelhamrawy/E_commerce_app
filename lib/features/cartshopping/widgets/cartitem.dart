@@ -104,6 +104,6 @@ class Cartitem extends StatelessWidget {
                       )
                     ],
                   )),
-            );;
+            );
   }
 }
