@@ -25,6 +25,6 @@ class Constants {
   static const String color =  "Colors";  
   static const String totalPrice =  "Total price";
   static const String addtocart =  "Add to cart";
-  
+  static const String baseURL = "";
 
 }
