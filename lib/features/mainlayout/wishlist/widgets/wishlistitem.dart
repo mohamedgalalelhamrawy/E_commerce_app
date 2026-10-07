@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/core/resources/appcolors.dart';
 import 'package:e_commerce_app/core/resources/appstyles.dart';
 import 'package:e_commerce_app/core/resources/assets-manager.dart';
+import 'package:e_commerce_app/core/resources/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -94,7 +95,6 @@ class _WishListItemState extends State<WishListItem> {
                           )
                         ],
                       ),
-                    
                       Row(
                         children: [
                           Container(
@@ -105,7 +105,7 @@ class _WishListItemState extends State<WishListItem> {
                                 color: widget.color, shape: BoxShape.circle),
                           ),
                           Text(
-                            " Color",
+                            Constants.color,
                             style: getTextStyle(
                                 color: widget.color,
                                 fontSize: 14.sp,
@@ -140,7 +140,7 @@ class _WishListItemState extends State<WishListItem> {
                               ),
                               onPressed: () {},
                               child: Text(
-                                "Add to Cart",
+                                Constants.addtocart,
                                 style: Appstyles.font14WhiteBold
                               ))
                         ],
@@ -152,6 +152,5 @@ class _WishListItemState extends State<WishListItem> {
             ],
           )),
     );
-    ;
   }
 }
