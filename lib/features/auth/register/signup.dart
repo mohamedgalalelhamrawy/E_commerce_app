@@ -77,6 +77,7 @@ class _SignUpState extends State<SignUp> {
                   height: 24.h,
                 ),
                 CustomTextField(
+                  validator: Appvalidate.validatePhone,
                   controller: phonecontroller,
                   textInputType: TextInputType.number,
                   hint: Constants.enterYourMobileNo,

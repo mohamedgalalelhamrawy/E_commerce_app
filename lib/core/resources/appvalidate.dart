@@ -24,7 +24,7 @@
   }
 
   static String? validateName(String? val){
-    RegExp nameRegExp = RegExp(r"^[a-zA-Z0-9_\s]+$");
+    RegExp nameRegExp = RegExp(r"^[a-zA-Z\u0600-\u06FF\s]+$");
     if(val == null || val.trim().isEmpty ){
       return "this feild is required" ; 
     }else if (nameRegExp.hasMatch(val) == false){
@@ -34,5 +34,18 @@
     }
   }
 
+  static String? validatePhone(String? value) {
+  if (value == null || value.trim().isEmpty) {
+    return 'this feild is required';
+  }
+
+  RegExp phoneRegex = RegExp(r'^01[0125][0-9]{8}$');
+
+  if (!phoneRegex.hasMatch(value)) {
+    return 'رقم الهاتف غير صحيح، يجب أن يبدأ بـ 010, 011, 012, 015 ويتكون من 11 رقم';
+  }
+
+  return null; 
+}
 
  }
