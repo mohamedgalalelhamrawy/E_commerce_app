@@ -1,9 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce_app/core/failures/failures.dart';
-import 'package:flutter/material.dart';
-import '../entities/register_respose_enttity.dart';
+import 'package:injectable/injectable.dart';
+import '../entities/register_response_entity.dart';
 import '../repository/auth_repository.dart';
 
+@injectable
 class RegisterUseCase {
   final AuthRepository authRepository;
   RegisterUseCase(this.authRepository);

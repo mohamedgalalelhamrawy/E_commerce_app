@@ -1,9 +1,9 @@
-import '../../domain/entities/register_respose_enttity.dart';
+import '../../domain/entities/register_response_entity.dart';
 
 class RegisterResposeDto {
-  final String message;
-  final UserDto user;
-  final String token;
+  final String? message;
+  final UserDto? user;
+  final String? token;
   final String? statusMsg;
 
   RegisterResposeDto(
@@ -15,14 +15,14 @@ class RegisterResposeDto {
   factory RegisterResposeDto.fromJson(Map<String, dynamic> json) =>
       RegisterResposeDto(
         message: json["message"],
-        user: UserDto.fromJson(json["user"]),
+        user: json['user'] != null ? UserDto.fromJson(json['user']) : null,
         token: json["token"],
         statusMsg: json["statusMsg"],
       );
 
   Map<String, dynamic> toJson() => {
         "message": message,
-        "user": user.toJson(),
+        "user": user?.toJson(),
         "token": token,
         "statusMsg": statusMsg
       };
@@ -30,7 +30,7 @@ class RegisterResposeDto {
   RegisterResponseEntity toEntity() {
     return RegisterResponseEntity(
         message: message,
-        user: user.toEntity(),
+        user: user?.toEntity(),
         token: token,
         statusMsg: statusMsg);
   }

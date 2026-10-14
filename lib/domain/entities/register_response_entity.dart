@@ -1,9 +1,9 @@
 
 
 class RegisterResponseEntity {
-  final String message;
-  final UserEntity user;
-  final String token;
+  final String? message;
+  final UserEntity? user;
+  final String? token;
   final String? statusMsg;
 
   RegisterResponseEntity({

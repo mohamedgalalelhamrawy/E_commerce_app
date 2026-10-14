@@ -1,9 +1,12 @@
+import 'package:e_commerce_app/core/di/service_locator.dart';
 import 'package:e_commerce_app/core/route-manager/route-generator.dart';
 import 'package:e_commerce_app/core/route-manager/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  configureDependencies();
   runApp(const MyApp());
 }
 
