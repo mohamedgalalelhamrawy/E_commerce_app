@@ -10,4 +10,8 @@ abstract class AuthRemoteDataSource {
       required String email,
       required String password,
       required String phone});
+ Future<Either<Failures,RegisterResposeDto>> logIn({
+    required String email,
+    required String password,
+  });     
 }

@@ -18,8 +18,9 @@ import '../../data/remotedatasources/auth_remote_data_source_impl.dart'
     as _i325;
 import '../../data/repository/Auth_repository_impl.dart' as _i1007;
 import '../../domain/repository/auth_repository.dart' as _i614;
+import '../../domain/usecases/login_use_case.dart' as _i210;
 import '../../domain/usecases/register_use_case.dart' as _i502;
-import '../../features/auth/register/cubit/cubit/register_cubit.dart' as _i926;
+import '../../features/auth/cubit/cubit/auth_cubit.dart' as _i490;
 import '../api/apimanager.dart' as _i808;
 
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -38,9 +39,13 @@ _i174.GetIt init(
       () => _i325.AuthRemoteDataSourceImpl(gh<_i808.ApiManager>()));
   gh.factory<_i614.AuthRepository>(
       () => _i1007.AuthRepositoryImpl(gh<_i563.AuthRemoteDataSource>()));
+  gh.factory<_i210.LoginUseCase>(
+      () => _i210.LoginUseCase(gh<_i614.AuthRepository>()));
   gh.factory<_i502.RegisterUseCase>(
       () => _i502.RegisterUseCase(gh<_i614.AuthRepository>()));
-  gh.factory<_i926.RegisterCubit>(
-      () => _i926.RegisterCubit(gh<_i502.RegisterUseCase>()));
+  gh.factory<_i490.RegisterCubit>(() => _i490.RegisterCubit(
+        gh<_i502.RegisterUseCase>(),
+        gh<_i210.LoginUseCase>(),
+      ));
   return getIt;
 }

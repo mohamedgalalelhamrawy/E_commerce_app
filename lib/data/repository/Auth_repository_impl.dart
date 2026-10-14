@@ -19,4 +19,11 @@ class AuthRepositoryImpl implements AuthRepository {
    return   eitherResult.fold((error) => Left(error),
         (registerResponseDto) => Right(registerResponseDto.toEntity()));
   }
+
+  @override
+  Future<Either<Failures, RegisterResponseEntity>> logIn({required String email, required String password}) async {
+    var eitherResult = await authRemoteDataSource.logIn(email: email, password: password);
+    return eitherResult.fold((error) => Left(error),
+        (registerResponseDto) => Right(registerResponseDto.toEntity()));
+  }
 }

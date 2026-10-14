@@ -30,7 +30,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           "rePassword": password,
           "phone": phone,
         },); 
-        print("RESPONSE DATA IS: ${response.data}");
         var model = RegisterResposeDto.fromJson(response.data) ;
        if(response.statusCode! >= 200 && response.statusCode! < 300){
                return Right(model);
@@ -44,4 +43,28 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       throw Exception(e.toString());
     }
   }
-}
+
+  @override
+  Future<Either<Failures, RegisterResposeDto>> logIn({required String email, required String password}) async {
+    try {
+      var checkResult = await Connectivity().checkConnectivity();
+      if (checkResult.contains(ConnectivityResult.wifi) || checkResult.contains(ConnectivityResult.mobile)) {
+        var response = await apiManager.postData(endPoints: EndPoints.logIn, body: {
+          "email": email,
+          "password": password,
+        },); 
+        var model = RegisterResposeDto.fromJson(response.data) ;
+       if(response.statusCode! >= 200 && response.statusCode! < 300){
+               return Right(model);
+       }else{
+           return Left(ServerFailure(model.message ?? "An error occurred"));
+       }
+      }else{
+          return Left(NetworkFailure("No Internet"));
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+  }
+
