@@ -14,20 +14,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+class SignUp extends StatelessWidget {
+SignUp({super.key});
 
-  @override
-  State<SignUp> createState() => _SignUpState();
-}
-
-bool obscure = true;
-
-class _SignUpState extends State<SignUp> {
   var viewmodel = sl<RegisterCubit>();
+
   @override
   Widget build(BuildContext context) {
-    return BlocListener<RegisterCubit, RegisterState>(
+    return BlocConsumer<RegisterCubit, RegisterState>(
       bloc: viewmodel,
       listener: (context, state) {
         if(state is RegisterLoadingState){
@@ -40,134 +34,136 @@ class _SignUpState extends State<SignUp> {
           DialogUtils.showMessage(context: context, message: "Register Successfully",posActionTitle: "ok",title: "success");
         }
       },
-      child: Scaffold(
-        backgroundColor: Appcolors.Primary,
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: Form(
-              key: viewmodel.formkey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 85.h,
-                  ),
-                  Center(
-                    child: Image.asset(
-                      height: 71.h,
-                      width: 237.w,
-                      AppAssets.routeLogo,
-                      color: Colors.white,
+      builder: (context, state) {
+        return Scaffold(
+          backgroundColor: Appcolors.Primary,
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: Form(
+                key: viewmodel.formkey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 85.h,
                     ),
-                  ),
-                  SizedBox(
-                    height: 47.h,
-                  ),
-                  ////////////////////////////////////////////// full name
-                  Text(
-                    Constants.fullName,
-                    style: Appstyles.authHeaders,
-                  ),
-                  SizedBox(
-                    height: 24.h,
-                  ),
-                  CustomTextField(
-                    controller: viewmodel.namecontroller,
-                    validator: Appvalidate.validateName,
-                    hint: Constants.enterYourFullName,
-                    obscureText: false,
-                  ),
-                  SizedBox(
-                    height: 32.h,
-                  ),
-                  ///////////////////////////////////////////// mobile number
-                  Text(
-                    Constants.mobileNumber,
-                    style: Appstyles.authHeaders,
-                  ),
-                  SizedBox(
-                    height: 24.h,
-                  ),
-                  CustomTextField(
-                    validator: Appvalidate.validatePhone,
-                    controller: viewmodel.phonecontroller,
-                    textInputType: TextInputType.number,
-                    hint: Constants.enterYourMobileNo,
-                    obscureText: false,
-                  ),
-                  SizedBox(
-                    height: 32.h,
-                  ),
-                  ///////////////////////////////////////////////// E-mail address
-                  Text(Constants.emailaddress, style: Appstyles.authHeaders),
-                  SizedBox(
-                    height: 24.h,
-                  ),
-                  CustomTextField(
-                    controller: viewmodel.emailcontroller,
-                    validator: Appvalidate.validateEmail,
-                    hint: Constants.enterYourEmailAdress,
-                    obscureText: false,
-                  ),
-                  SizedBox(
-                    height: 32.h,
-                  ),
-                  //////////////////////////////////////////////// password
-                  Text(Constants.password, style: Appstyles.authHeaders),
-                  SizedBox(
-                    height: 24.h,
-                  ),
-                  CustomTextField(
-                    controller: viewmodel.passwordcontroller,
-                    validator: Appvalidate.validatePassword,
-                    hint: Constants.enterYourPassword,
-                    obscureText: obscure,
-                    suffexicon: IconButton(
-                      icon: obscure
-                          ? Icon(Icons.visibility_off_outlined)
-                          : Icon(Icons.visibility_outlined),
-                      onPressed: () {
-                        setState(() {
-                          obscure = !obscure;
-                        });
-                      },
+                    Center(
+                      child: Image.asset(
+                        height: 71.h,
+                        width: 237.w,
+                        AppAssets.routeLogo,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 32.h,
-                  ),
-                  //////////////////////////////////////////////
-                  SizedBox(
-                    height: 32.h,
-                  ),
-                  CustomButton(
-                      onpressed: () {
-                        if (viewmodel.formkey.currentState!.validate() == true) {
-                          viewmodel.register();
-                        }
-                      },
-                      text: Constants.signup),
-                  /////////////////////////////////////////
-                  SizedBox(
-                    height: 16.h,
-                  ),
-                  Center(
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, Routes.loginScreen);
-                      },
-                      child: Text(Constants.alreadyHaveAccount,
-                          style: Appstyles.authHeaders),
+                    SizedBox(
+                      height: 47.h,
                     ),
-                  ),
-                  SizedBox(height: 24.h)
-                ],
+                    ////////////////////////////////////////////// full name
+                    Text(
+                      Constants.fullName,
+                      style: Appstyles.authHeaders,
+                    ),
+                    SizedBox(
+                      height: 24.h,
+                    ),
+                    CustomTextField(
+                      controller: viewmodel.namecontroller,
+                      validator: Appvalidate.validateName,
+                      hint: Constants.enterYourFullName,
+                      obscureText: false,
+                    ),
+                    SizedBox(
+                      height: 32.h,
+                    ),
+                    ///////////////////////////////////////////// mobile number
+                    Text(
+                      Constants.mobileNumber,
+                      style: Appstyles.authHeaders,
+                    ),
+                    SizedBox(
+                      height: 24.h,
+                    ),
+                    CustomTextField(
+                      validator: Appvalidate.validatePhone,
+                      controller: viewmodel.phonecontroller,
+                      textInputType: TextInputType.number,
+                      hint: Constants.enterYourMobileNo,
+                      obscureText: false,
+                    ),
+                    SizedBox(
+                      height: 32.h,
+                    ),
+                    ///////////////////////////////////////////////// E-mail address
+                    Text(Constants.emailaddress,
+                        style: Appstyles.authHeaders),
+                    SizedBox(
+                      height: 24.h,
+                    ),
+                    CustomTextField(
+                      controller: viewmodel.emailcontroller,
+                      validator: Appvalidate.validateEmail,
+                      hint: Constants.enterYourEmailAdress,
+                      obscureText: false,
+                    ),
+                    SizedBox(
+                      height: 32.h,
+                    ),
+                    //////////////////////////////////////////////// password
+                    Text(Constants.password, style: Appstyles.authHeaders),
+                    SizedBox(
+                      height: 24.h,
+                    ),
+                    CustomTextField(
+                      controller: viewmodel.passwordcontroller,
+                      validator: Appvalidate.validatePassword,
+                      hint: Constants.enterYourPassword,
+                      obscureText: viewmodel.isobsecure,
+                      suffexicon: IconButton(
+                        icon: viewmodel.isobsecure
+                            ? Icon(Icons.visibility_off_outlined)
+                            : Icon(Icons.visibility_outlined),
+                        onPressed: () {
+                          viewmodel.changepasswordobsecure();
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 32.h,
+                    ),
+                    //////////////////////////////////////////////
+                    SizedBox(
+                      height: 32.h,
+                    ),
+                    CustomButton(
+                        onpressed: () {
+                          if (viewmodel.formkey.currentState!.validate() ==
+                              true) {
+                            viewmodel.register();
+                          }
+                        },
+                        text: Constants.signup),
+                    /////////////////////////////////////////
+                    SizedBox(
+                      height: 16.h,
+                    ),
+                    Center(
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, Routes.loginScreen);
+                        },
+                        child: Text(Constants.alreadyHaveAccount,
+                            style: Appstyles.authHeaders),
+                      ),
+                    ),
+                    SizedBox(height: 24.h)
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

@@ -23,7 +23,8 @@ class RegisterCubit extends Cubit<RegisterState> {
   var phonecontroller = TextEditingController();
   var passwordcontroller = TextEditingController();
   var namecontroller = TextEditingController();
-
+ 
+ bool isobsecure = true ;
   void register() async {
     emit(RegisterLoadingState());
 
@@ -57,5 +58,12 @@ class RegisterCubit extends Cubit<RegisterState> {
       print("=== SUCCESS ===");
       emit(LogInSuccessState(registerResponseEntity: response));
     });
+  } 
+
+  void changepasswordobsecure(){
+      isobsecure = !isobsecure;
+      emit(Changepasswordobsecurestate(isobsecure: isobsecure));
   }
 }
+
+

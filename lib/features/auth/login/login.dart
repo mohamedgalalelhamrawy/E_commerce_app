@@ -13,37 +13,40 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class LoginScreen extends StatelessWidget {
+ LoginScreen({super.key});
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-bool obscure = true;
-
-class _LoginScreenState extends State<LoginScreen> {
   var viewmodel = sl<RegisterCubit>();
+
   @override
   Widget build(BuildContext context) {
-    return BlocListener<RegisterCubit, RegisterState>(
-      bloc:viewmodel ,
+    return BlocConsumer<RegisterCubit, RegisterState>(
+      bloc: viewmodel,
       listener: (context, state) {
-        if(state is LogInLoadingState){
+        if (state is LogInLoadingState) {
           DialogUtils.showLoading(context: context, message: "...loading");
-        }else if(state is LogInErrorState){
+        } else if (state is LogInErrorState) {
           DialogUtils.hideLoading(context);
-          DialogUtils.showMessage(context: context, message: state.failures.errmessage,posActionTitle: "ok",title: "Error");
-        }else if(state is LogInSuccessState){
+          DialogUtils.showMessage(
+              context: context,
+              message: state.failures.errmessage,
+              posActionTitle: "ok",
+              title: "Error");
+        } else if (state is LogInSuccessState) {
           DialogUtils.hideLoading(context);
-          DialogUtils.showMessage(context: context, message: "login Successfully",posActionTitle: "ok",title: "success",
-          posAction: () {
-            Navigator.pushReplacementNamed(context, Routes.mainlayoutSCreen);
-          },
+          DialogUtils.showMessage(
+            context: context,
+            message: "login Successfully",
+            posActionTitle: "ok",
+            title: "success",
+            posAction: () {
+              Navigator.pushReplacementNamed(context, Routes.mainlayoutSCreen);
+            },
           );
         }
       },
-      child: Scaffold(
+      builder: (context, state) {
+        return Scaffold(
           backgroundColor: Appcolors.Primary,
           body: SingleChildScrollView(
             child: Padding(
@@ -69,7 +72,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 79.h,
                     ),
                     //////////////////////////////////////////
-                    Text(Constants.welcomeBack, style: Appstyles.authMainHeaders1),
+                    Text(Constants.welcomeBack,
+                        style: Appstyles.authMainHeaders1),
                     Text(Constants.pleaseSignIn,
                         style: Appstyles.subAuthMainHeaders1),
                     SizedBox(
@@ -98,18 +102,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 24.h,
                     ),
                     CustomTextField(
-                      controller:viewmodel.passwordcontroller,
+                      controller: viewmodel.passwordcontroller,
                       validator: Appvalidate.validatePassword,
                       hint: Constants.enterYourPassword,
-                      obscureText: obscure,
+                      obscureText: viewmodel.isobsecure,
                       suffexicon: IconButton(
-                        icon: obscure
+                        icon: viewmodel.isobsecure
                             ? Icon(Icons.visibility_off_outlined)
                             : Icon(Icons.visibility_outlined),
                         onPressed: () {
-                          setState(() {
-                            obscure = !obscure;
-                          });
+                          viewmodel.changepasswordobsecure();
                         },
                       ),
                     ),
@@ -134,7 +136,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     CustomButton(
                         onpressed: () {
-                          if (viewmodel.loginFormKey.currentState!.validate() == true) {
+                          if (viewmodel.loginFormKey.currentState!.validate() ==
+                              true) {
                             viewmodel.logIn();
                           }
                         },
@@ -156,7 +159,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-        ),
+        );
+      },
     );
   }
 }

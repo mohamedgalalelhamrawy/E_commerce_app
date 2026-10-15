@@ -32,6 +32,9 @@ class LogInSuccessState extends RegisterState{
  LogInSuccessState({required this.registerResponseEntity});
 }
 
-
+class Changepasswordobsecurestate extends RegisterState{
+  bool isobsecure;
+  Changepasswordobsecurestate({required this.isobsecure});
+}
 
 
