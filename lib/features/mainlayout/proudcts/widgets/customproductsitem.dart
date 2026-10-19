@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/core/resources/assets-manager.dart';
+import 'package:e_commerce_app/domain/entities/get_all_products_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce_app/core/resources/appcolors.dart';
 import 'package:e_commerce_app/core/resources/appstyles.dart';
@@ -7,14 +8,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Customproductsitem extends StatefulWidget {
-   Customproductsitem({super.key});
+  Customproductsitem({super.key, required this.productResponseEntity});
+  ProductResponseEntity productResponseEntity;
   @override
   State<Customproductsitem> createState() => _CustomproductsitemState();
 }
 
 class _CustomproductsitemState extends State<Customproductsitem> {
   bool isfavorite = false;
-  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,8 +33,8 @@ class _CustomproductsitemState extends State<Customproductsitem> {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: NetworkImage(
-                          "https://image.celine.com/asset/a1b1b7f5-86c8-466c-9e7c-35925e5c9af6/353143840C-01OK_1_SUM23.jpg?V3&im=Resize=(1200)"),
-                      fit: BoxFit.fill,
+                          widget.productResponseEntity.imageCover ?? "الصورة"),
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
@@ -73,10 +74,11 @@ class _CustomproductsitemState extends State<Customproductsitem> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Nike air jordon",
+                Text(widget.productResponseEntity.title ?? "title",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: Appstyles.font14darkprimary),
-                Text(
-                    "Nike shoes for playing football with your friends at home",
+                Text(widget.productResponseEntity.description ?? "description",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Appstyles.font14darkprimary),
@@ -85,12 +87,16 @@ class _CustomproductsitemState extends State<Customproductsitem> {
                 ),
                 Row(
                   children: [
-                    Text("EGP 1,100",
-                        style:Appstyles.font16darkprimary),
+                    Text(
+                        widget.productResponseEntity.priceAfterDiscount != null
+                            ? widget.productResponseEntity.priceAfterDiscount
+                                .toString()
+                            : "new Price",
+                        style: Appstyles.font16darkprimary),
                     SizedBox(
                       width: 16.w,
                     ),
-                    Text("EGP 1,500",
+                    Text(widget.productResponseEntity.price.toString(),
                         style: Appstyles.underLinePrice),
                   ],
                 ),
@@ -103,11 +109,13 @@ class _CustomproductsitemState extends State<Customproductsitem> {
                     Row(
                       children: [
                         Text(Constants.review,
-                            style:Appstyles.font14darkprimary),
+                            style: Appstyles.font14darkprimary),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 2.w),
-                          child: Text("(4.5)",
-                              style:Appstyles.font14darkprimary),
+                          child: Text(
+                              widget.productResponseEntity.ratingsAverage
+                                  .toString(),
+                              style: Appstyles.font14darkprimary),
                         ),
                         Icon(
                           Icons.star,
