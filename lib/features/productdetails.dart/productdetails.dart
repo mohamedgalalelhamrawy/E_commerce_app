@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/core/resources/constants.dart';
+import 'package:e_commerce_app/domain/entities/get_all_products_entity.dart';
 import 'package:e_commerce_app/features/productdetails.dart/widgets/colorselector.dart';
 import 'package:e_commerce_app/core/components/customcarouselslider.dart';
 import 'package:e_commerce_app/core/components/productcounter.dart';
@@ -8,23 +9,25 @@ import 'package:e_commerce_app/core/resources/appcolors.dart';
 import 'package:e_commerce_app/core/resources/appstyles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:injectable/injectable.dart';
 
-class ProductDetails extends StatelessWidget {
+class ProductDetails extends StatefulWidget {
   ProductDetails({super.key});
-  List<String> networkList = [
-    "https://api.cezma.cloud/storage/thumbnails/products/web/1724682831temp4833654890058354368.png",
-    "https://api.cezma.cloud/storage/thumbnails/products/web/1724682840temp2545218499505083095.png",
-    "https://api.cezma.cloud/storage/thumbnails/products/web/1724682840temp7707597972883286266.png"
-  ];
+
+  @override
+  State<ProductDetails> createState() => _ProductDetailsState();
+}
+class _ProductDetailsState extends State<ProductDetails> {
+  int selectedQuantity = 1;
+
   @override
   Widget build(BuildContext context) {
+    var product = ModalRoute.of(context)?.settings.arguments as ProductResponseEntity;
+      var unitPrice = product.priceAfterDiscount ?? product.price ?? 0;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
-          "Product Details",
-          style:Appstyles.font20darkprimaryBold
-        ),
+        title: Text("Product Details", style: Appstyles.font20darkprimaryBold),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -34,7 +37,9 @@ class ProductDetails extends StatelessWidget {
             children: [
               Container(
                 child: CustomCarouselSlider(
-                    height: 300.h, isNetwork: true, imgList: networkList),
+                    height: 300.h,
+                    isNetwork: true,
+                    imgList: product.images ?? []),
               ),
               SizedBox(
                 height: 24.h,
@@ -42,13 +47,14 @@ class ProductDetails extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "Nike Air Jordon",
-                    style: Appstyles.font18darkprimaryBold,
+                  Expanded(
+                    child: Text(
+                      product.title ?? "",
+                      style: Appstyles.font18darkprimaryBold,
+                    ),
                   ),
-                  Text(
-                    "EGP 3,500",
-                   style: Appstyles.font18darkprimaryBold,
+                  Text( unitPrice.toString() ,
+                    style: Appstyles.font18darkprimaryBold,
                   )
                 ],
               ),
@@ -64,10 +70,8 @@ class ProductDetails extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.r),
                         border: Border.all(width: 1.r, color: Colors.grey)),
-                    child: Text(
-                      "3,230 Sold",
-                      style: Appstyles.font14darkprimaryBold
-                    ),
+                    child: Text("${product.sold} Sold",
+                        style: Appstyles.font14darkprimaryBold),
                   ),
                   Icon(
                     Icons.star,
@@ -76,15 +80,15 @@ class ProductDetails extends StatelessWidget {
                   SizedBox(
                     width: 4.w,
                   ),
-                  Text(
-                    "4.8 (7,500)",
-                    style:Appstyles.font14darkprimary
-                  ),
+                  Text("${product.ratingsAverage}(${product.ratingsQuantity})",
+                      style: Appstyles.font14darkprimary),
                   Spacer(),
                   ProductCounter(
                     initialValue: 1,
                     onChanged: (newCount) {
-                      // قيمة الـ count الجديدة لما يزيد أو ينقص
+                      setState(() {
+                        selectedQuantity = newCount;
+                      });
                     },
                   )
                 ],
@@ -99,14 +103,12 @@ class ProductDetails extends StatelessWidget {
               SizedBox(
                 height: 8.h,
               ),
-              CustomReadMore(
-                  text:
-                      "Prepared by experienced English teachers, the texts, articles and conversations are brief and appropriate to your level of proficiency. Take the multiple-choice quiz following each text, and you'll get the results immediately. You will feel both challenged and accomplished! You can even download (as PDF) and print the texts and exercises. It's enjoyable, fun and free. Good luck!"),
+              CustomReadMore(text: product.description ?? ""),
               SizedBox(
                 height: 16.h,
               ),
               Text(
-               Constants.size,
+                Constants.size,
                 style: Appstyles.font18darkprimaryBold,
               ),
               SizedBox(
@@ -116,20 +118,11 @@ class ProductDetails extends StatelessWidget {
               SizedBox(
                 height: 16.h,
               ),
-              Text(
-                Constants.color,
-                style:Appstyles.font18darkprimaryBold
-              ),
+              Text(Constants.color, style: Appstyles.font18darkprimaryBold),
               SizedBox(
                 height: 8.h,
               ),
-              Colorselector(colorsList: [
-                Color(0xFF2C2C2C),
-                Color(0xFFBC341A),
-                Color(0xFF0973E8),
-                Color(0xFF00AB41),
-                Color(0xFFFF6B6B),
-              ]),
+              Colorselector(colorsList: product.availableColors ?? []),
               SizedBox(
                 height: 48.h,
               ),
@@ -149,8 +142,7 @@ class ProductDetails extends StatelessWidget {
                         SizedBox(
                           height: 8.h,
                         ),
-                        Text(
-                          "EGP 3,500",
+                        Text( "${selectedQuantity*unitPrice}",
                           style: Appstyles.font18darkprimaryBold,
                         )
                       ],
@@ -163,7 +155,8 @@ class ProductDetails extends StatelessWidget {
                           EdgeInsets.symmetric(horizontal: 40.w, vertical: 5.h),
                       decoration: BoxDecoration(
                           color: Appcolors.Primary,
-                          borderRadius: BorderRadius.all(Radius.circular(20.r))),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(20.r))),
                       child: Row(
                         children: [
                           Icon(
@@ -176,7 +169,7 @@ class ProductDetails extends StatelessWidget {
                           ),
                           Text(
                             Constants.addtocart,
-                            style:Appstyles.font20WhiteBold,
+                            style: Appstyles.font20WhiteBold,
                           ),
                         ],
                       ),

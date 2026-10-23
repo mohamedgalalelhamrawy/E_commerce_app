@@ -112,9 +112,7 @@ class _CustomproductsitemState extends State<Customproductsitem> {
                             style: Appstyles.font14darkprimary),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 2.w),
-                          child: Text(
-                              widget.productResponseEntity.ratingsAverage
-                                  .toString(),
+                          child: Text("(${widget.productResponseEntity.ratingsAverage.toString()})",
                               style: Appstyles.font14darkprimary),
                         ),
                         Icon(
@@ -149,6 +147,5 @@ class _CustomproductsitemState extends State<Customproductsitem> {
         ],
       ),
     );
-    ;
   }
 }

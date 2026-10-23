@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Colorselector extends StatefulWidget {
    const Colorselector({super.key,required this.colorsList,this.onColorSelected});
-     final List<Color> colorsList;
+     final List<dynamic> colorsList;
     final Function(Color)? onColorSelected ;
    @override
    State<Colorselector> createState() => _ColorselectorState();

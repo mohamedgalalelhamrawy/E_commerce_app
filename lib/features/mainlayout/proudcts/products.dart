@@ -7,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProuductsScreen extends StatelessWidget {
- ProuductsScreen({super.key});
- var viewmodel = sl<ProductsCubit>();
+  ProuductsScreen({super.key});
+  var viewmodel = sl<ProductsCubit>();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,27 +17,36 @@ class ProuductsScreen extends StatelessWidget {
         child: BlocBuilder<ProductsCubit, ProductsState>(
           bloc: viewmodel..getAllProducts(),
           builder: (context, state) {
-            if(state is ProductsSccessState){
+            if (state is ProductsSccessState) {
               return GridView.builder(
-              itemCount: 20,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16.w,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 0.72),
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, Routes.productDetailsScreen);
-                  },
-                  child: Customproductsitem(productResponseEntity:state.getAllProductsResponseEntity.data![index] ,),
-                );
-              },
-            );
-            } else if(state is ProductsErrorState){
-              return Center(child: Text(state.failures.errmessage),);
+                itemCount: 20,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16.w,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: 0.72),
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.productDetailsScreen,
+                          arguments:
+                              state.getAllProductsResponseEntity.data![index]);
+                    },
+                    child: Customproductsitem(
+                      productResponseEntity:
+                          state.getAllProductsResponseEntity.data![index],
+                    ),
+                  );
+                },
+              );
+            } else if (state is ProductsErrorState) {
+              return Center(
+                child: Text(state.failures.errmessage),
+              );
             } else {
-              return Center(child: CircularProgressIndicator(),);
+              return Center(
+                child: CircularProgressIndicator(),
+              );
             }
           },
         ),

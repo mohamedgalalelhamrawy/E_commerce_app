@@ -20,7 +20,7 @@ class RouteGenerator {
       case Routes.signUpScreen :
       return MaterialPageRoute(builder: (_) => SignUp());
       case Routes.productDetailsScreen :
-      return MaterialPageRoute(builder: (_) => ProductDetails());
+      return MaterialPageRoute(builder: (_) => ProductDetails(),settings: settings);
       case Routes.cartShopscreen :
       return MaterialPageRoute(builder: (_) => Cartshoppingscreen());
       default: undefinedRoute();
