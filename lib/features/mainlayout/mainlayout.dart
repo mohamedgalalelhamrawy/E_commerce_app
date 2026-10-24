@@ -1,5 +1,6 @@
-
 import 'package:e_commerce_app/core/route-manager/routes.dart';
+import 'package:e_commerce_app/core/sharedprefrence/sharedprefrence.dart';
+import 'package:e_commerce_app/core/utils/dialogutils.dart';
 import 'package:e_commerce_app/features/mainlayout/cubit/cubit/main_layout_cubit.dart';
 import 'package:e_commerce_app/features/mainlayout/widgets/bottonnavitem.dart';
 import 'package:e_commerce_app/core/resources/appcolors.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Mainlayout extends StatelessWidget {
   Mainlayout({super.key});
@@ -37,7 +39,7 @@ class Mainlayout extends StatelessWidget {
                 selectedItemColor: Colors.white,
                 unselectedItemColor: Colors.white70,
                 onTap: (index) {
-                 viewmodel.changeSelectedIndex(index);
+                  viewmodel.changeSelectedIndex(index);
                 },
                 items: [
                   BottomNavigationBarItem(
@@ -66,17 +68,37 @@ class Mainlayout extends StatelessWidget {
             ),
           ),
           appBar: AppBar(
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, Routes.cartShopscreen);
-                  },
-                  icon: Icon(
-                    Icons.shopping_cart,
-                    size: 24.sp,
-                    color: Appcolors.Primary,
-                  ))
-            ],
+            actions: viewmodel.selectedIndex == 3
+                ? [
+                    IconButton(
+                        onPressed: () {
+                          DialogUtils.showMessage(
+                              context: context,
+                              message: "are you sure for logging out",
+                              posActionTitle: "yes",
+                              posAction: () async{
+                                await SharedPreferencesUtils.removeData(key: "token");
+                                Navigator.pushNamedAndRemoveUntil(context,
+                                    Routes.loginScreen, (route) => false);
+                              });
+                        },
+                        icon: Icon(
+                          Icons.logout,
+                          size: 24.sp,
+                          color: Appcolors.Primary,
+                        ))
+                  ]
+                : [
+                    IconButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, Routes.cartShopscreen);
+                        },
+                        icon: Icon(
+                          Icons.shopping_cart,
+                          size: 24.sp,
+                          color: Appcolors.Primary,
+                        ))
+                  ],
             scrolledUnderElevation: 0,
             backgroundColor: Colors.white,
             automaticallyImplyLeading: false,
