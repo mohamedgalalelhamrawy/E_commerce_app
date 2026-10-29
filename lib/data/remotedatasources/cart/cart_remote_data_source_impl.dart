@@ -62,4 +62,53 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
       throw Exception(e.toString());
     }
   }
+
+  @override
+  Future<Either<Failures, GetCartResponseDto>> deleteItemInCart(String productID) async {
+     try {
+      var checkResult = await Connectivity().checkConnectivity();
+      if (checkResult.contains(ConnectivityResult.wifi) ||
+          checkResult.contains(ConnectivityResult.mobile)) {
+        var token = SharedPreferencesUtils.getdata(key: "token");
+        var response = await apiManager.deleteData(
+            endPoints: "${EndPoints.addProductToCart}/$productID",
+            headers: {"token": token.toString()});
+        var model = GetCartResponseDto.fromJson(response.data);
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          return Right(model);
+        } else {
+          return Left(ServerFailure(model.message ?? "An error occurred"));
+        }
+      } else {
+        return Left(NetworkFailure("No Internet"));
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<Failures, GetCartResponseDto>> updateCountInCart(String productID, int count) async{
+     try {
+      var checkResult = await Connectivity().checkConnectivity();
+      if (checkResult.contains(ConnectivityResult.wifi) ||
+          checkResult.contains(ConnectivityResult.mobile)) {
+        var token = SharedPreferencesUtils.getdata(key: "token");
+        var response = await apiManager.putData(
+             endPoints: "${EndPoints.addProductToCart}/$productID",
+             body: { "count": count},
+            headers: {"token": token.toString()});
+        var model = GetCartResponseDto.fromJson(response.data);
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          return Right(model);
+        } else {
+          return Left(ServerFailure(model.message ?? "An error occurred"));
+        }
+      } else {
+        return Left(NetworkFailure("No Internet"));
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

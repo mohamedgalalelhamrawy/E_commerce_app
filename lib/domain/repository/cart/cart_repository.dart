@@ -7,4 +7,6 @@ import 'package:e_commerce_app/domain/entities/cart/get_cart_response_entity.dar
 abstract class CartRepository {
   Future<Either<Failures,AddProductToCartResponseEntity>> addProductToCart(String productID) ;
   Future<Either<Failures,GetCartResponseEntity>> getProductsCart();
+  Future<Either<Failures,GetCartResponseEntity>> deleteItemInCart(String productID);
+  Future<Either<Failures,GetCartResponseEntity>> updateCountInCart(String productID,int count);
 }

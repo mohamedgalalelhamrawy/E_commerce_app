@@ -7,7 +7,9 @@ class ApiManager {
   Dio dio = Dio();
   ApiManager();
   Future<Response> getData(
-      {required String endPoints, Map<String, dynamic>? queryParameters,Map<String, dynamic>? headers}) {
+      {required String endPoints,
+      Map<String, dynamic>? queryParameters,
+      Map<String, dynamic>? headers}) {
     return dio.get(
       Constants.baseURL + endPoints,
       queryParameters: queryParameters,
@@ -32,5 +34,39 @@ class ApiManager {
             return status != null;
           },
         ));
+  }
+
+  Future<Response> putData({
+    required String endPoints,
+    Map<String, dynamic>? body,
+    Map<String, dynamic>? headers,
+  }) async {
+    return dio.put(
+      Constants.baseURL + endPoints,
+      data: body,
+      options: Options(
+        headers: headers,
+        validateStatus: (status) {
+          return status != null;
+        },
+      ),
+    );
+  }
+
+  Future<Response> deleteData({
+    required String endPoints,
+    Map<String, dynamic>? body,
+    Map<String, dynamic>? headers,
+  }) async {
+    return dio.delete(
+      Constants.baseURL + endPoints,
+      data: body,
+      options: Options(
+        headers: headers,
+        validateStatus: (status) {
+          return status != null;
+        },
+      ),
+    );
   }
 }
