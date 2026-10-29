@@ -7,11 +7,12 @@ class ApiManager {
   Dio dio = Dio();
   ApiManager();
   Future<Response> getData(
-      {required String endPoints, Map<String, dynamic>? queryParameters}) {
+      {required String endPoints, Map<String, dynamic>? queryParameters,Map<String, dynamic>? headers}) {
     return dio.get(
       Constants.baseURL + endPoints,
       queryParameters: queryParameters,
       options: Options(
+        headers: headers,
         validateStatus: (status) {
           return status != null;
         },
