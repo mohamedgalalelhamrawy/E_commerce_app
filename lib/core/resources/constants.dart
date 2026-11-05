@@ -25,6 +25,8 @@ class Constants {
   static const String color =  "Colors";  
   static const String totalPrice =  "Total price";
   static const String addtocart =  "Add to cart";
+   static const String checkOut =  "Check Out";
+   static const String cart =  "Cart";
   static const String baseURL = "https://ecommerce.routemisr.com";
 
 }

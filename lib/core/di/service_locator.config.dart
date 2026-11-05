@@ -16,24 +16,43 @@ import 'package:injectable/injectable.dart' as _i526;
 import '../../data/remotedatasources/auth_remote_data_source.dart' as _i563;
 import '../../data/remotedatasources/auth_remote_data_source_impl.dart'
     as _i325;
+import '../../data/remotedatasources/cart/cart_remote_data_source.dart'
+    as _i426;
+import '../../data/remotedatasources/cart/cart_remote_data_source_impl.dart'
+    as _i696;
 import '../../data/remotedatasources/home_remote_data_source.dart' as _i584;
 import '../../data/remotedatasources/home_remote_data_source_impl.dart'
     as _i579;
 import '../../data/remotedatasources/products_remote_data_source.dart' as _i682;
 import '../../data/remotedatasources/products_remote_data_source_impl.dart'
     as _i1022;
+import '../../data/remotedatasources/wishlist/wishlist_remote_data_source.dart'
+    as _i635;
+import '../../data/remotedatasources/wishlist/wishlist_remote_data_source_impl.dart'
+    as _i815;
 import '../../data/repository/Auth_repository_impl.dart' as _i1007;
+import '../../data/repository/cart/cart_repository_impl.dart' as _i756;
 import '../../data/repository/home_repository_impl.dart' as _i1043;
 import '../../data/repository/products_repository_imp.dart' as _i785;
+import '../../data/repository/wishlist/wishlist_repository_impl.dart' as _i29;
 import '../../domain/repository/auth_repository.dart' as _i614;
+import '../../domain/repository/cart_repository.dart' as _i461;
 import '../../domain/repository/home_repository.dart' as _i181;
 import '../../domain/repository/products_repostory.dart' as _i547;
+import '../../domain/repository/wishlist_repository.dart' as _i325;
+import '../../domain/usecases/cart/add_product_to_cart_use_case.dart' as _i633;
+import '../../domain/usecases/cart/delete_item_in_cart_use_case.dart' as _i100;
+import '../../domain/usecases/cart/get_cart_use_case.dart' as _i1;
+import '../../domain/usecases/cart/update_count_in_cart_use_case.dart' as _i180;
 import '../../domain/usecases/get_all_brands_use_case.dart' as _i318;
 import '../../domain/usecases/get_all_categories_use_case.dart' as _i716;
 import '../../domain/usecases/get_all_products_use_case.dart' as _i436;
 import '../../domain/usecases/login_use_case.dart' as _i210;
 import '../../domain/usecases/register_use_case.dart' as _i502;
+import '../../domain/usecases/wishlist/add_product_to_wishlist_use_case.dart'
+    as _i1028;
 import '../../features/auth/cubit/cubit/auth_cubit.dart' as _i490;
+import '../../features/cartshopping/cubit/cart_cubit.dart' as _i771;
 import '../../features/mainlayout/home.dart/cubit/cubit/home_cubit.dart'
     as _i520;
 import '../../features/mainlayout/proudcts/cubit/cubit/products_cubit.dart'
@@ -54,20 +73,41 @@ _i174.GetIt init(
   gh.singleton<_i808.ApiManager>(() => _i808.ApiManager());
   gh.factory<_i584.HomeRemoteDataSource>(
       () => _i579.HomeRemoteDataSourceImpl(apiManager: gh<_i808.ApiManager>()));
+  gh.factory<_i635.WishlistRemoteDataSource>(() =>
+      _i815.WishlistRemoteDataSourceImpl(apiManager: gh<_i808.ApiManager>()));
   gh.factory<_i682.ProductsRemoteDataSource>(() =>
       _i1022.ProductsRemoteDataSourceImpl(apiManager: gh<_i808.ApiManager>()));
   gh.factory<_i181.HomeRepository>(() => _i1043.HomeRepositoryImpl(
       homeRemoteDataSource: gh<_i584.HomeRemoteDataSource>()));
+  gh.factory<_i426.CartRemoteDataSource>(
+      () => _i696.CartRemoteDataSourceImpl(apiManager: gh<_i808.ApiManager>()));
   gh.factory<_i563.AuthRemoteDataSource>(
       () => _i325.AuthRemoteDataSourceImpl(gh<_i808.ApiManager>()));
+  gh.factory<_i461.CartRepository>(() => _i756.CartRepositoryImpl(
+      cartRemoteDataSource: gh<_i426.CartRemoteDataSource>()));
   gh.factory<_i318.GetAllbrandsUseCase>(() =>
       _i318.GetAllbrandsUseCase(homeRepository: gh<_i181.HomeRepository>()));
   gh.factory<_i716.GetAllCategoriesUseCase>(() => _i716.GetAllCategoriesUseCase(
       homeRepository: gh<_i181.HomeRepository>()));
+  gh.factory<_i633.AddProductToCartUseCase>(() => _i633.AddProductToCartUseCase(
+      cartRepository: gh<_i461.CartRepository>()));
+  gh.factory<_i100.DeleteItemInCartUseCase>(() => _i100.DeleteItemInCartUseCase(
+      cartRepository: gh<_i461.CartRepository>()));
+  gh.factory<_i1.GetCartUseCase>(
+      () => _i1.GetCartUseCase(cartRepository: gh<_i461.CartRepository>()));
+  gh.factory<_i180.UpdateCountInCartUseCase>(() =>
+      _i180.UpdateCountInCartUseCase(
+          cartRepository: gh<_i461.CartRepository>()));
   gh.factory<_i614.AuthRepository>(
       () => _i1007.AuthRepositoryImpl(gh<_i563.AuthRemoteDataSource>()));
   gh.factory<_i547.ProductsRepostory>(() => _i785.ProductsRepositoryImp(
       productsRemoteDataSource: gh<_i682.ProductsRemoteDataSource>()));
+  gh.factory<_i325.WishlistRepository>(() => _i29.WishlistRepositoryImpl(
+      wishlistRemoteDataSource: gh<_i635.WishlistRemoteDataSource>()));
+  gh.factory<_i771.CartCubit>(() => _i771.CartCubit(
+        addProductToCartUseCase: gh<_i633.AddProductToCartUseCase>(),
+        getCartUseCase: gh<_i1.GetCartUseCase>(),
+      ));
   gh.factory<_i210.LoginUseCase>(
       () => _i210.LoginUseCase(gh<_i614.AuthRepository>()));
   gh.factory<_i502.RegisterUseCase>(
@@ -80,6 +120,9 @@ _i174.GetIt init(
         getAllCategoriesUseCase: gh<_i716.GetAllCategoriesUseCase>(),
         getAllbrandsUseCase: gh<_i318.GetAllbrandsUseCase>(),
       ));
+  gh.factory<_i1028.AddProductToWishlistUseCase>(() =>
+      _i1028.AddProductToWishlistUseCase(
+          wishlistRepository: gh<_i325.WishlistRepository>()));
   gh.factory<_i490.RegisterCubit>(() => _i490.RegisterCubit(
         gh<_i502.RegisterUseCase>(),
         gh<_i210.LoginUseCase>(),

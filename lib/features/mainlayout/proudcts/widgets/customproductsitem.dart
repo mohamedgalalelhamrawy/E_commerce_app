@@ -1,14 +1,17 @@
 import 'package:e_commerce_app/core/resources/assets-manager.dart';
+import 'package:e_commerce_app/core/utils/dialogutils.dart';
 import 'package:e_commerce_app/domain/entities/get_all_products_entity.dart';
+import 'package:e_commerce_app/features/cartshopping/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce_app/core/resources/appcolors.dart';
 import 'package:e_commerce_app/core/resources/appstyles.dart';
 import 'package:e_commerce_app/core/resources/constants.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Customproductsitem extends StatefulWidget {
-  Customproductsitem({super.key, required this.productResponseEntity});
+  Customproductsitem({super.key, required this.productResponseEntity,});
   ProductResponseEntity productResponseEntity;
   @override
   State<Customproductsitem> createState() => _CustomproductsitemState();
@@ -112,7 +115,8 @@ class _CustomproductsitemState extends State<Customproductsitem> {
                             style: Appstyles.font14darkprimary),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 2.w),
-                          child: Text("(${widget.productResponseEntity.ratingsAverage.toString()})",
+                          child: Text(
+                              "(${widget.productResponseEntity.ratingsAverage.toString()})",
                               style: Appstyles.font14darkprimary),
                         ),
                         Icon(
@@ -123,7 +127,10 @@ class _CustomproductsitemState extends State<Customproductsitem> {
                     ),
                     Spacer(),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        CartCubit.get(context).addProductToCart(
+                            widget.productResponseEntity.id.toString());
+                      },
                       child: Container(
                         margin: EdgeInsets.only(right: 2.w),
                         height: 32.h,
