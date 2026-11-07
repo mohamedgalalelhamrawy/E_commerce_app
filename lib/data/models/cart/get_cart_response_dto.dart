@@ -26,7 +26,9 @@ class GetCartResponseDto {
           status: json["status"],
           numOfCartItems: json["numOfCartItems"],
           cartId: json["cartId"],
-          data: GetCartDataResponseDto.fromJson(json["data"]),
+          data: json["data"] != null
+              ? GetCartDataResponseDto.fromJson(json["data"])
+              : null,
           message: json["message"],
           statusMsg: json["statusMsg"]);
 
@@ -70,8 +72,12 @@ class GetCartDataResponseDto {
                 .map((x) => ProductElementDto.fromJson(x))
                 .toList()
             : null,
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
+        createdAt: json["createdAt"] != null
+            ? DateTime.parse(json["createdAt"])
+            : null,
+        updatedAt: json["updatedAt"] != null
+            ? DateTime.parse(json["updatedAt"])
+            : null,
         v: json["__v"],
         totalCartPrice: json["totalCartPrice"],
       );
@@ -92,7 +98,7 @@ class GetCartDataResponseDto {
 class ProductElementDto {
   final int? count;
   final String? id;
-  final ProductResponseDto? product;
+  final CartProductDto? product;
   final int? price;
 
   ProductElementDto({
@@ -106,7 +112,9 @@ class ProductElementDto {
       ProductElementDto(
         count: json["count"],
         id: json["_id"],
-        product: ProductResponseDto.fromJson(json["product"]),
+        product: json["product"] != null
+            ? CartProductDto.fromJson(json["product"])
+            : null,
         price: json["price"],
       );
 
@@ -116,6 +124,102 @@ class ProductElementDto {
       id: id,
       price: price,
       product: product?.toEntity(),
+    );
+  }
+}
+
+class CartProductDto {
+  final List<CartCategoryDto>? subcategory;
+  final String? id;
+  final String? title;
+  final int? quantity;
+  final String? imageCover;
+  final CartCategoryDto? category;
+  final CartCategoryDto? brand;
+  final double? ratingsAverage;
+  final String? datumId;
+
+  CartProductDto({
+    this.subcategory,
+    this.id,
+    this.title,
+    this.quantity,
+    this.imageCover,
+    this.category,
+    this.brand,
+    this.ratingsAverage,
+    this.datumId,
+  });
+
+  factory CartProductDto.fromJson(Map<String, dynamic> json) {
+    return CartProductDto(
+      subcategory: json['subcategory'] != null
+          ? (json['subcategory'] as List)
+              .map((e) => CartCategoryDto.fromJson(e))
+              .toList()
+          : [],
+
+      id: json['_id'],
+      title: json['title'],
+      quantity: json['quantity'],
+      imageCover: json['imageCover'],
+
+      category: json['category'] != null
+          ? CartCategoryDto.fromJson(json['category'])
+          : null,
+
+      brand: json['brand'] != null
+          ? CartCategoryDto.fromJson(json['brand'])
+          : null,
+
+      ratingsAverage: (json['ratingsAverage'] as num?)?.toDouble(),
+      datumId: json['id'],
+    );
+  }
+
+  CartProductEntity toEntity() {
+    return CartProductEntity(
+      subcategory: subcategory?.map((e) => e.toEntity()).toList() ?? [],
+      id: id,
+      title: title,
+      quantity: quantity,
+      imageCover: imageCover,
+      category: category?.toEntity(),
+      brand: brand?.toEntity(),
+      ratingsAverage: ratingsAverage,
+      datumId: datumId,
+    );
+  }
+}
+
+class CartCategoryDto {
+  final String? id;
+  final String? name;
+  final String? slug;
+  final String? image;
+
+  CartCategoryDto({
+    this.id,
+    this.name,
+    this.slug,
+    this.image,
+  });
+
+  factory CartCategoryDto.fromJson(Map<String, dynamic> json) {
+    return CartCategoryDto(
+      id: json['_id'],
+      name: json['name'],
+      slug: json['slug'],
+      image: json['image'],
+    );
+  }
+
+  CartCategoryEntity toEntity() {
+    return CartCategoryEntity(
+      id: id,
+      name: name,
+      slug: slug,
+      image: image,
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/core/resources/appcolors.dart';
 import 'package:e_commerce_app/core/resources/appstyles.dart';
 import 'package:e_commerce_app/core/resources/constants.dart';
+import 'package:e_commerce_app/domain/entities/cart/get_cart_response_entity.dart';
 import 'package:e_commerce_app/domain/entities/get_all_products_entity.dart';
 import 'package:e_commerce_app/features/cartshopping/cubit/cart_cubit.dart';
 import 'package:e_commerce_app/features/cartshopping/widgets/cartitem.dart';
@@ -17,13 +18,11 @@ class Cartshoppingscreen extends StatefulWidget {
 }
 
 class _CartshoppingscreenState extends State<Cartshoppingscreen> {
-//   @override
-// void initState() {
-//   super.initState();
-//   WidgetsBinding.instance.addPostFrameCallback((_) {
-//     CartCubit.get(context).getProductsOfCart(); 
-//   });
-// }
+  @override
+void initState() {
+  super.initState();
+  CartCubit.get(context).getProductsOfCart();
+}
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CartCubit, CartState>(
@@ -33,7 +32,13 @@ class _CartshoppingscreenState extends State<Cartshoppingscreen> {
         current is GetProductsOfCartSuccessState ;
       },
       builder: (context, state) {
-        if(state is GetProductsOfCartSuccessState){
+        if(state is GetProductsOfCartLoadingState){
+          return const Center(child: CircularProgressIndicator(),);
+        }
+         else if(state is GetProductsOfCartErrorState){
+          return  Center(child: Text(state.failures.errmessage),);
+        }
+        else if(state is GetProductsOfCartSuccessState){
          return  Scaffold(
           appBar: AppBar(
             centerTitle: true,
@@ -48,10 +53,10 @@ class _CartshoppingscreenState extends State<Cartshoppingscreen> {
               children: [
                 Expanded(
                   child: ListView.builder(
-                    itemCount: 10,
+                    itemCount: state.getCartResponseEntity.data!.products!.length,
                     itemBuilder: (context, index) {
                       return Cartitem(
-                        product: state.getCartResponseEntity.data!.products![index].product as ProductResponseEntity  ,
+                        productElment: state.getCartResponseEntity.data!.products![index] ,
                       );
                     },
                   ),
@@ -112,10 +117,8 @@ class _CartshoppingscreenState extends State<Cartshoppingscreen> {
             ),
           ),
         );
-        } else if(state is GetProductsOfCartErrorState){
-          return Center(child: Text(state.failures.errmessage),);
-        }else {
-          return Center(child: CircularProgressIndicator(),);
+        } else{
+          return SizedBox();
         }
       },
     );

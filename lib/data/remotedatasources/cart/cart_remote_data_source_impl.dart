@@ -7,6 +7,7 @@ import 'package:e_commerce_app/core/sharedprefrence/sharedprefrence.dart';
 import 'package:e_commerce_app/data/models/cart/add_to_cart_response_dto.dart';
 import 'package:e_commerce_app/data/models/cart/get_cart_response_dto.dart';
 import 'package:e_commerce_app/data/remotedatasources/cart/cart_remote_data_source.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: CartRemoteDataSource)
@@ -49,6 +50,7 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
         var response = await apiManager.getData(
             endPoints: EndPoints.addProductToCart,headers: {"token": token.toString()}
         );
+           debugPrint(response.data.toString());
         var model = GetCartResponseDto.fromJson(response.data);
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
           return Right(model);

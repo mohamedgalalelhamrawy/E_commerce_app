@@ -1,6 +1,4 @@
 
-import 'package:e_commerce_app/domain/entities/get_all_products_entity.dart';
-
 class GetCartResponseEntity {
   final String? status;
   final int? numOfCartItems;
@@ -42,7 +40,7 @@ class GetCartDataResponseEntity {
 class ProductElementEntity {
   final int? count;
   final String? id;
-  final ProductResponseEntity? product;
+  final CartProductEntity? product;
   final int? price;
 
   ProductElementEntity({
@@ -51,6 +49,45 @@ class ProductElementEntity {
      this.product,
      this.price,
   });
-  
+}
+
+
+class CartProductEntity {
+  final List<CartCategoryEntity>? subcategory;
+  final String? id;
+  final String? title;
+  final int? quantity;
+  final String? imageCover;
+  final CartCategoryEntity? category;
+  final CartCategoryEntity? brand;
+  final double? ratingsAverage;
+  final String? datumId;
+
+  CartProductEntity({
+    this.subcategory,
+    this.id,
+    this.title,
+    this.quantity,
+    this.imageCover,
+    this.category,
+    this.brand,
+    this.ratingsAverage,
+    this.datumId,
+  });
+
+}
+
+class CartCategoryEntity {
+  final String? id;
+  final String? name;
+  final String? slug;
+  final String? image;
+
+  CartCategoryEntity({
+    this.id,
+    this.name,
+    this.slug,
+    this.image,
+  });
 }
 
