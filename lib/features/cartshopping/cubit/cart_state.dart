@@ -2,34 +2,56 @@ part of 'cart_cubit.dart';
 
 @immutable
 sealed class CartState {}
+
 final class CartInitial extends CartState {}
-class AddProductToCartLoadingState extends CartState{}
-class AddProductToCartErrorState extends CartState{
- final Failures failures;
+
+class AddProductToCartLoadingState extends CartState {}
+
+class AddProductToCartErrorState extends CartState {
+  final Failures failures;
   AddProductToCartErrorState({required this.failures});
 }
-class AddProductToCartSuccessState extends CartState{
- final AddProductToCartResponseEntity addProductToCartResponseEntity;
+
+class AddProductToCartSuccessState extends CartState {
+  final AddProductToCartResponseEntity addProductToCartResponseEntity;
   AddProductToCartSuccessState({required this.addProductToCartResponseEntity});
-} 
+}
+
 ////////////////////////// get products
-class GetProductsOfCartLoadingState extends CartState{}
-class GetProductsOfCartErrorState extends CartState{
- final Failures failures;
+class GetProductsOfCartLoadingState extends CartState {}
+
+class GetProductsOfCartErrorState extends CartState {
+  final Failures failures;
   GetProductsOfCartErrorState({required this.failures});
 }
-class GetProductsOfCartSuccessState extends CartState{
- final GetCartResponseEntity getCartResponseEntity;
+
+class GetProductsOfCartSuccessState extends CartState {
+  final GetCartResponseEntity getCartResponseEntity;
   GetProductsOfCartSuccessState({required this.getCartResponseEntity});
 }
+
 ////////////////////////// update count
-class UpdateCountOfproductCartLoadingState extends CartState{}
-class UpdateCountOfproductCartErrorState extends CartState{
-   final Failures failures;
- UpdateCountOfproductCartErrorState({required this.failures});
+class UpdateCountOfproductCartLoadingState extends CartState {}
+
+class UpdateCountOfproductCartErrorState extends CartState {
+  final Failures failures;
+  UpdateCountOfproductCartErrorState({required this.failures});
 }
-class UpdateCountOfproductCartSuccessState extends CartState{
+
+class UpdateCountOfproductCartSuccessState extends CartState {
   final GetCartResponseEntity getCartResponseEntity;
   UpdateCountOfproductCartSuccessState({required this.getCartResponseEntity});
 }
-////////////////////////// Remove
+
+////////////////////////// Remove Product
+class RemoveProductOfCartLoadingState extends CartState {}
+
+class RemoveProductOfCartErrorState extends CartState {
+  final Failures failures;
+  RemoveProductOfCartErrorState({required this.failures});
+}
+
+class RemoveProductOfCartSuccessState extends CartState {
+  final GetCartResponseEntity getCartResponseEntity;
+  RemoveProductOfCartSuccessState({required this.getCartResponseEntity});
+}

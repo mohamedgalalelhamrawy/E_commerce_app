@@ -104,17 +104,18 @@ _i174.GetIt init(
       productsRemoteDataSource: gh<_i682.ProductsRemoteDataSource>()));
   gh.factory<_i325.WishlistRepository>(() => _i29.WishlistRepositoryImpl(
       wishlistRemoteDataSource: gh<_i635.WishlistRemoteDataSource>()));
+  gh.factory<_i771.CartCubit>(() => _i771.CartCubit(
+        addProductToCartUseCase: gh<_i633.AddProductToCartUseCase>(),
+        getCartUseCase: gh<_i1.GetCartUseCase>(),
+        updateCountInCartUseCase: gh<_i180.UpdateCountInCartUseCase>(),
+        deleteItemInCartUseCase: gh<_i100.DeleteItemInCartUseCase>(),
+      ));
   gh.factory<_i210.LoginUseCase>(
       () => _i210.LoginUseCase(gh<_i614.AuthRepository>()));
   gh.factory<_i502.RegisterUseCase>(
       () => _i502.RegisterUseCase(gh<_i614.AuthRepository>()));
   gh.factory<_i436.GetAllProductsUseCase>(() => _i436.GetAllProductsUseCase(
       productsRepostory: gh<_i547.ProductsRepostory>()));
-  gh.factory<_i771.CartCubit>(() => _i771.CartCubit(
-        addProductToCartUseCase: gh<_i633.AddProductToCartUseCase>(),
-        getCartUseCase: gh<_i1.GetCartUseCase>(),
-        updateCountInCartUseCase: gh<_i180.UpdateCountInCartUseCase>(),
-      ));
   gh.factory<_i1005.ProductsCubit>(() => _i1005.ProductsCubit(
       getAllProductsUseCase: gh<_i436.GetAllProductsUseCase>()));
   gh.factory<_i520.HomeCubit>(() => _i520.HomeCubit(

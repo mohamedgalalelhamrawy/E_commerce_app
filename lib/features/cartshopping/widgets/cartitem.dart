@@ -51,7 +51,9 @@ class Cartitem extends StatelessWidget {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              CartCubit.get(context).removeProuctInCart(productId: productElment.product!.id!);
+                            },
                             child: Container(
                               child: Icon(Icons.delete),
                             ),

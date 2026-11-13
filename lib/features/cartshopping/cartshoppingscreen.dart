@@ -27,12 +27,20 @@ class _CartshoppingscreenState extends State<Cartshoppingscreen> {
   Widget build(BuildContext context) {
     return BlocConsumer<CartCubit, CartState>(
       listenWhen: (previous, current) {
-        return current is UpdateCountOfproductCartErrorState;
+        return current is UpdateCountOfproductCartErrorState||
+        current is RemoveProductOfCartErrorState ||
+        current is RemoveProductOfCartSuccessState;
       },
       listener: (context, state) {
         if (state is UpdateCountOfproductCartErrorState) {
           DialogUtils.showMessage(
               context: context, message: state.failures.errmessage);
+        } else if (state is RemoveProductOfCartErrorState){
+           DialogUtils.showMessage(
+              context: context, message: state.failures.errmessage);
+        } else if(state is RemoveProductOfCartSuccessState){
+           DialogUtils.showMessage(
+              context: context, message: state.getCartResponseEntity.message!);
         }
       },
       buildWhen: (previous, current) {
