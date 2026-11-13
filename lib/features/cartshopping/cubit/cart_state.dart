@@ -22,4 +22,14 @@ class GetProductsOfCartSuccessState extends CartState{
  final GetCartResponseEntity getCartResponseEntity;
   GetProductsOfCartSuccessState({required this.getCartResponseEntity});
 }
-//////////////////////////
+////////////////////////// update count
+class UpdateCountOfproductCartLoadingState extends CartState{}
+class UpdateCountOfproductCartErrorState extends CartState{
+   final Failures failures;
+ UpdateCountOfproductCartErrorState({required this.failures});
+}
+class UpdateCountOfproductCartSuccessState extends CartState{
+  final GetCartResponseEntity getCartResponseEntity;
+  UpdateCountOfproductCartSuccessState({required this.getCartResponseEntity});
+}
+////////////////////////// Remove

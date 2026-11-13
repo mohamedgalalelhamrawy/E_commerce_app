@@ -2,6 +2,7 @@ import 'package:e_commerce_app/core/components/productcounter.dart';
 import 'package:e_commerce_app/core/resources/appcolors.dart';
 import 'package:e_commerce_app/core/resources/appstyles.dart';
 import 'package:e_commerce_app/domain/entities/cart/get_cart_response_entity.dart';
+import 'package:e_commerce_app/features/cartshopping/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -86,7 +87,15 @@ class Cartitem extends StatelessWidget {
                             productElment.price.toString(),
                             style: Appstyles.font18darkprimaryBold,
                           ),
-                          ProductCounter()
+                          ProductCounter(
+                            count: productElment.count ?? 1,
+                            onChanged: (newCount) {
+                              CartCubit.get(context).updateCountOfProduct(
+                                productID: productElment.product!.id!,
+                                count: newCount,
+                              );
+                            },
+                          )
                         ],
                       )
                     ],

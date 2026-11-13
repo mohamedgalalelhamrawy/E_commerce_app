@@ -90,7 +90,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       style: Appstyles.font14darkprimary),
                   Spacer(),
                   ProductCounter(
-                    initialValue: 1,
+                    count: selectedQuantity,
                     onChanged: (newCount) {
                       setState(() {
                         selectedQuantity = newCount;

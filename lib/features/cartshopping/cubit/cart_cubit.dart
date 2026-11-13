@@ -4,6 +4,7 @@ import 'package:e_commerce_app/domain/entities/cart/add_to_cart_response_entity.
 import 'package:e_commerce_app/domain/entities/cart/get_cart_response_entity.dart';
 import 'package:e_commerce_app/domain/usecases/cart/add_product_to_cart_use_case.dart';
 import 'package:e_commerce_app/domain/usecases/cart/get_cart_use_case.dart';
+import 'package:e_commerce_app/domain/usecases/cart/update_count_in_cart_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -15,10 +16,11 @@ part 'cart_state.dart';
 class CartCubit extends Cubit<CartState> {
   AddProductToCartUseCase addProductToCartUseCase;
   GetCartUseCase getCartUseCase;
+  UpdateCountInCartUseCase updateCountInCartUseCase;
   CartCubit(
-      {required this.addProductToCartUseCase, required this.getCartUseCase})
+      {required this.addProductToCartUseCase, required this.getCartUseCase, required this.updateCountInCartUseCase})
       : super(CartInitial());
-
+  
   void addProductToCart(String productID) async {
     emit(AddProductToCartLoadingState());
     var either = await addProductToCartUseCase.invoke(productID);
@@ -31,7 +33,7 @@ class CartCubit extends Cubit<CartState> {
   }
   ////////////
   static CartCubit get(context) => BlocProvider.of<CartCubit>(context);
-  ///////////
+  /////////// get products
   void getProductsOfCart() async {
     emit(GetProductsOfCartLoadingState());
     var either = await getCartUseCase.invoke();
@@ -39,6 +41,16 @@ class CartCubit extends Cubit<CartState> {
       emit(GetProductsOfCartErrorState(failures: error));
     }, (getdata) {
       emit(GetProductsOfCartSuccessState(getCartResponseEntity: getdata));
+    });
+  }
+  /////////// update count
+  void updateCountOfProduct ({required String productID ,required int count}) async{
+      emit(UpdateCountOfproductCartLoadingState());
+      var either = await updateCountInCartUseCase.invoke(productID, count);
+       either.fold((error) {
+      emit(UpdateCountOfproductCartErrorState(failures: error));
+    }, (updateCount) {
+      emit(GetProductsOfCartSuccessState(getCartResponseEntity: updateCount));
     });
   }
 }
