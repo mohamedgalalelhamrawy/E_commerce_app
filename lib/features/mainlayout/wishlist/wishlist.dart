@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/core/utils/dialogutils.dart';
 import 'package:e_commerce_app/features/cartshopping/cubit/cart_cubit.dart';
 import 'package:e_commerce_app/features/mainlayout/wishlist/cubit/wish_list_cubit.dart';
 import 'package:e_commerce_app/features/mainlayout/wishlist/widgets/wishlistitem.dart';
@@ -18,8 +19,22 @@ class _WishlistScreenState extends State<WishlistScreen> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: BlocListener<CartCubit, CartState>(
-        listener: (context, state) {
-          
+              listener: (context, state) {
+                debugPrint("CART LISTENER: //${state.runtimeType}");
+                if (state is AddProductToCartLoadingState) {
+                  DialogUtils.showLoading(
+                      context: context, message: "...Loading");
+                } else if (state is AddProductToCartSuccessState) {
+                  DialogUtils.hideLoading(context);
+                  DialogUtils.showMessage(
+                      context: context,
+                      message: state.addProductToCartResponseEntity.message
+                          .toString());
+                } else if (state is AddProductToCartErrorState) {
+                  DialogUtils.hideLoading(context);
+                  DialogUtils.showMessage(
+                      context: context, message: state.failures.errmessage);
+               }
         },
         child: BlocBuilder<WishListCubit, WishListState>(
           builder: (context, state) {

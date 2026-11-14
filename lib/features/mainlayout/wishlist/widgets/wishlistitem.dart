@@ -3,23 +3,19 @@ import 'package:e_commerce_app/core/resources/appstyles.dart';
 import 'package:e_commerce_app/core/resources/assets-manager.dart';
 import 'package:e_commerce_app/core/resources/constants.dart';
 import 'package:e_commerce_app/domain/entities/get_all_products_entity.dart';
+import 'package:e_commerce_app/features/cartshopping/cubit/cart_cubit.dart';
 import 'package:e_commerce_app/features/mainlayout/wishlist/cubit/wish_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-class WishListItem extends StatefulWidget {
+class WishListItem extends StatelessWidget {
   const WishListItem(
       {super.key, this.favorite, required this.productResponseEntity});
   final VoidCallback? favorite;
   final ProductResponseEntity productResponseEntity;
 
-  @override
-  State<WishListItem> createState() => _WishListItemState();
-}
-
-class _WishListItemState extends State<WishListItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,7 +33,7 @@ class _WishListItemState extends State<WishListItem> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(15.r)),
                   child: Image.network(
-                    widget.productResponseEntity.imageCover ?? "",
+                    productResponseEntity.imageCover ?? "",
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -54,29 +50,28 @@ class _WishListItemState extends State<WishListItem> {
                         children: [
                           Expanded(
                             child: Text(
-                              widget.productResponseEntity.title ?? '',
+                              productResponseEntity.title ?? '',
                               style: Appstyles.font18darkprimaryBold,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
                           GestureDetector(
-                            onTap: widget.favorite,
+                            onTap: favorite,
                             child: Container(
                               ////// el alb
                               child: BlocBuilder<WishListCubit, WishListState>(
                                 builder: (context, state) {
                                   bool isFavorite = WishListCubit.get(context)
                                       .isFavorite(
-                                          widget.productResponseEntity.id!);
+                                          productResponseEntity.id!);
                                   return InkWell(
                                     onTap: () {
                                       if (isFavorite) {
                                         return null;
                                       } else {
                                         WishListCubit.get(context)
-                                            .addProductToWishlist(widget
-                                                .productResponseEntity.id!);
+                                            .addProductToWishlist(productResponseEntity.id!);
                                       }
                                     },
                                     child: Container(
@@ -126,11 +121,10 @@ class _WishListItemState extends State<WishListItem> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            widget.productResponseEntity.priceAfterDiscount ==
+                            productResponseEntity.priceAfterDiscount ==
                                     null
-                                ? widget.productResponseEntity.price.toString()
-                                : widget
-                                    .productResponseEntity.priceAfterDiscount
+                                ? productResponseEntity.price.toString()
+                                : productResponseEntity.priceAfterDiscount
                                     .toString(),
                             style: Appstyles.font18darkprimaryBold,
                           ),
@@ -138,10 +132,10 @@ class _WishListItemState extends State<WishListItem> {
                             width: 8.w,
                           ),
                           Text(
-                              widget.productResponseEntity.priceAfterDiscount ==
+                              productResponseEntity.priceAfterDiscount ==
                                       null
                                   ? ""
-                                  : widget.productResponseEntity.price
+                                  : productResponseEntity.price
                                       .toString(),
                               style: TextStyle(
                                   decoration: TextDecoration.lineThrough,
@@ -159,7 +153,9 @@ class _WishListItemState extends State<WishListItem> {
                                 backgroundColor: Appcolors.Primary,
                                 fixedSize: Size(100.w, 26.h),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                CartCubit.get(context).addProductToCart(productResponseEntity.id!);
+                              },
                               child: Text(Constants.addtocart,
                                   style: Appstyles.font14WhiteBold))
                         ],
