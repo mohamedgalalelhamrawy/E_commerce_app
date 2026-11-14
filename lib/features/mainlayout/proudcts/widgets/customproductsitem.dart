@@ -1,7 +1,7 @@
 import 'package:e_commerce_app/core/resources/assets-manager.dart';
-import 'package:e_commerce_app/core/utils/dialogutils.dart';
 import 'package:e_commerce_app/domain/entities/get_all_products_entity.dart';
 import 'package:e_commerce_app/features/cartshopping/cubit/cart_cubit.dart';
+import 'package:e_commerce_app/features/mainlayout/wishlist/cubit/wish_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce_app/core/resources/appcolors.dart';
 import 'package:e_commerce_app/core/resources/appstyles.dart';
@@ -10,15 +10,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-class Customproductsitem extends StatefulWidget {
-  Customproductsitem({super.key, required this.productResponseEntity,});
+class Customproductsitem extends StatelessWidget {
+  Customproductsitem({
+    super.key,
+    required this.productResponseEntity,
+  });
   ProductResponseEntity productResponseEntity;
-  @override
-  State<Customproductsitem> createState() => _CustomproductsitemState();
-}
-
-class _CustomproductsitemState extends State<Customproductsitem> {
-  bool isfavorite = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,7 +33,7 @@ class _CustomproductsitemState extends State<Customproductsitem> {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: NetworkImage(
-                          widget.productResponseEntity.imageCover ?? "الصورة"),
+                          productResponseEntity.imageCover ?? "الصورة"),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -44,29 +41,37 @@ class _CustomproductsitemState extends State<Customproductsitem> {
                 Positioned(
                   top: 8.h,
                   right: 8.w,
-                  child: InkWell(
-                    onTap: () {
-                      setState(() {
-                        isfavorite = !isfavorite;
-                      });
+                  //////////////// el alb
+                  child: BlocBuilder<WishListCubit, WishListState>( 
+                    builder: (context, state) {
+                       bool isFavorite = WishListCubit.get(context).isFavorite(productResponseEntity.id!);
+                      return InkWell(
+                        onTap: () {
+                          if(isFavorite){
+                            return null;
+                          }else{
+                            WishListCubit.get(context).addProductToWishlist(productResponseEntity.id!);
+                          }
+                        },
+                        child: Container(
+                          height: 32.h,
+                          width: 32.w,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          child: SvgPicture.asset(
+                              isFavorite
+                                  ? AppAssets.iconFavorites2
+                                  : AppAssets.iconFavorites,
+                              height: 19.h,
+                              width: 18.w,
+                              fit: BoxFit.cover,
+                              colorFilter: ColorFilter.mode(
+                                  Appcolors.Primary, BlendMode.srcIn)),
+                        ),
+                      );
                     },
-                    child: Container(
-                      height: 32.h,
-                      width: 32.w,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                      ),
-                      child: SvgPicture.asset(
-                          isfavorite
-                              ? AppAssets.iconFavorites2
-                              : AppAssets.iconFavorites,
-                          height: 19.h,
-                          width: 18.w,
-                          fit: BoxFit.cover,
-                          colorFilter: ColorFilter.mode(
-                              Appcolors.Primary, BlendMode.srcIn)),
-                    ),
                   ),
                 )
               ],
@@ -77,11 +82,11 @@ class _CustomproductsitemState extends State<Customproductsitem> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(widget.productResponseEntity.title ?? "title",
+                Text(productResponseEntity.title ?? "title",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Appstyles.font14darkprimary),
-                Text(widget.productResponseEntity.description ?? "description",
+                Text(productResponseEntity.description ?? "description",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Appstyles.font14darkprimary),
@@ -91,15 +96,15 @@ class _CustomproductsitemState extends State<Customproductsitem> {
                 Row(
                   children: [
                     Text(
-                        widget.productResponseEntity.priceAfterDiscount != null
-                            ? widget.productResponseEntity.priceAfterDiscount
+                        productResponseEntity.priceAfterDiscount != null
+                            ? productResponseEntity.priceAfterDiscount
                                 .toString()
                             : "new Price",
                         style: Appstyles.font16darkprimary),
                     SizedBox(
                       width: 16.w,
                     ),
-                    Text(widget.productResponseEntity.price.toString(),
+                    Text(productResponseEntity.price.toString(),
                         style: Appstyles.underLinePrice),
                   ],
                 ),
@@ -116,7 +121,7 @@ class _CustomproductsitemState extends State<Customproductsitem> {
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 2.w),
                           child: Text(
-                              "(${widget.productResponseEntity.ratingsAverage.toString()})",
+                              "(${productResponseEntity.ratingsAverage.toString()})",
                               style: Appstyles.font14darkprimary),
                         ),
                         Icon(
@@ -129,7 +134,7 @@ class _CustomproductsitemState extends State<Customproductsitem> {
                     InkWell(
                       onTap: () {
                         CartCubit.get(context).addProductToCart(
-                            widget.productResponseEntity.id.toString());
+                            productResponseEntity.id.toString());
                       },
                       child: Container(
                         margin: EdgeInsets.only(right: 2.w),

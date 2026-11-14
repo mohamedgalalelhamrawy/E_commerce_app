@@ -3,6 +3,7 @@ import 'package:e_commerce_app/core/route-manager/route-generator.dart';
 import 'package:e_commerce_app/core/route-manager/routes.dart';
 import 'package:e_commerce_app/core/sharedprefrence/sharedprefrence.dart';
 import 'package:e_commerce_app/features/cartshopping/cubit/cart_cubit.dart';
+import 'package:e_commerce_app/features/mainlayout/wishlist/cubit/wish_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,6 +35,9 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider<CartCubit>(
               create: (context) => sl<CartCubit>(),
+            ),
+             BlocProvider<WishListCubit>(
+              create: (context) => sl<WishListCubit>(),
             ),
           ],
           child: MaterialApp(

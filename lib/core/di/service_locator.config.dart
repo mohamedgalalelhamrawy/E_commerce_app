@@ -57,6 +57,7 @@ import '../../features/mainlayout/home.dart/cubit/cubit/home_cubit.dart'
     as _i520;
 import '../../features/mainlayout/proudcts/cubit/cubit/products_cubit.dart'
     as _i1005;
+import '../../features/mainlayout/wishlist/cubit/wish_list_cubit.dart' as _i255;
 import '../api/apimanager.dart' as _i808;
 
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -129,5 +130,7 @@ _i174.GetIt init(
         gh<_i502.RegisterUseCase>(),
         gh<_i210.LoginUseCase>(),
       ));
+  gh.factory<_i255.WishListCubit>(() => _i255.WishListCubit(
+      addProductToWishlistUseCase: gh<_i1028.AddProductToWishlistUseCase>()));
   return getIt;
 }
