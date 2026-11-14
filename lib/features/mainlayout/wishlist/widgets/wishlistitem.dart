@@ -2,37 +2,29 @@ import 'package:e_commerce_app/core/resources/appcolors.dart';
 import 'package:e_commerce_app/core/resources/appstyles.dart';
 import 'package:e_commerce_app/core/resources/assets-manager.dart';
 import 'package:e_commerce_app/core/resources/constants.dart';
+import 'package:e_commerce_app/domain/entities/get_all_products_entity.dart';
+import 'package:e_commerce_app/features/mainlayout/wishlist/cubit/wish_list_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class WishListItem extends StatefulWidget {
   const WishListItem(
-      {super.key,
-      this.favorite,
-      required this.img,
-      required this.prodName,
-      required this.totalprice,
-      required this.color});
+      {super.key, this.favorite, required this.productResponseEntity});
   final VoidCallback? favorite;
-  final String img;
-  final String prodName;
-
-  final String totalprice;
-  final Color color;
+  final ProductResponseEntity productResponseEntity;
 
   @override
   State<WishListItem> createState() => _WishListItemState();
 }
 
 class _WishListItemState extends State<WishListItem> {
-  bool isfavorite = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(bottom: 24.h),
       child: Container(
-          height: 113.h,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(17.r)),
               border: Border.all(
@@ -41,12 +33,12 @@ class _WishListItemState extends State<WishListItem> {
             children: [
               Container(
                 width: 120.w,
-                // height: 113.h,
+                height: 113.h,
                 child: ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(15.r)),
                   child: Image.network(
-                    widget.img,
-                    fit: BoxFit.fill,
+                    widget.productResponseEntity.imageCover ?? "",
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
@@ -54,42 +46,59 @@ class _WishListItemState extends State<WishListItem> {
                 child: Container(
                   margin: EdgeInsets.all(8.h),
                   child: Column(
-
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            widget.prodName,
-                            style: Appstyles.font18darkprimaryBold,
+                          Expanded(
+                            child: Text(
+                              widget.productResponseEntity.title ?? '',
+                              style: Appstyles.font18darkprimaryBold,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                           GestureDetector(
                             onTap: widget.favorite,
                             child: Container(
-                              child: InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    isfavorite = !isfavorite;
-                                  });
+                              ////// el alb
+                              child: BlocBuilder<WishListCubit, WishListState>(
+                                builder: (context, state) {
+                                  bool isFavorite = WishListCubit.get(context)
+                                      .isFavorite(
+                                          widget.productResponseEntity.id!);
+                                  return InkWell(
+                                    onTap: () {
+                                      if (isFavorite) {
+                                        return null;
+                                      } else {
+                                        WishListCubit.get(context)
+                                            .addProductToWishlist(widget
+                                                .productResponseEntity.id!);
+                                      }
+                                    },
+                                    child: Container(
+                                      height: 32.h,
+                                      width: 32.w,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: SvgPicture.asset(
+                                          isFavorite
+                                              ? AppAssets.iconFavorites2
+                                              : AppAssets.iconFavorites,
+                                          height: 19.h,
+                                          width: 18.w,
+                                          fit: BoxFit.cover,
+                                          colorFilter: ColorFilter.mode(
+                                              Appcolors.Primary,
+                                              BlendMode.srcIn)),
+                                    ),
+                                  );
                                 },
-                                child: Container(
-                                  height: 32.h,
-                                  width: 32.w,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: SvgPicture.asset(
-                                      isfavorite
-                                          ? AppAssets.iconFavorites2
-                                          : AppAssets.iconFavorites,
-                                      height: 19.h,
-                                      width: 18.w,
-                                      fit: BoxFit.cover,
-                                      colorFilter: ColorFilter.mode(
-                                          Appcolors.Primary, BlendMode.srcIn)),
-                                ),
                               ),
                             ),
                           )
@@ -102,47 +111,57 @@ class _WishListItemState extends State<WishListItem> {
                             width: 15.r,
                             height: 15.r,
                             decoration: BoxDecoration(
-                                color: widget.color, shape: BoxShape.circle),
+                                color: Colors.black, shape: BoxShape.circle),
                           ),
                           Text(
                             Constants.color,
                             style: getTextStyle(
-                                color: widget.color,
+                                color: Colors.black,
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w400),
                           ),
                         ],
                       ),
                       Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            widget.totalprice,
+                            widget.productResponseEntity.priceAfterDiscount ==
+                                    null
+                                ? widget.productResponseEntity.price.toString()
+                                : widget
+                                    .productResponseEntity.priceAfterDiscount
+                                    .toString(),
                             style: Appstyles.font18darkprimaryBold,
                           ),
-                          SizedBox(width: 8.w,),
-                          Text("EGP 1,500",
+                          SizedBox(
+                            width: 8.w,
+                          ),
+                          Text(
+                              widget.productResponseEntity.priceAfterDiscount ==
+                                      null
+                                  ? ""
+                                  : widget.productResponseEntity.price
+                                      .toString(),
                               style: TextStyle(
                                   decoration: TextDecoration.lineThrough,
                                   fontSize: 11.sp,
                                   color: Appcolors.opacityblue,
                                   fontWeight: FontWeight.w500)),
-                                  SizedBox(width: 10.w,),
+                          SizedBox(
+                            width: 10.w,
+                          ),
                           ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                padding: EdgeInsets
-                                    .zero, 
+                                padding: EdgeInsets.zero,
                                 minimumSize: Size.zero,
                                 backgroundColor: Appcolors.Primary,
-                                fixedSize: Size(
-                                    100.w, 26.h),
+                                fixedSize: Size(100.w, 26.h),
                               ),
                               onPressed: () {},
-                              child: Text(
-                                Constants.addtocart,
-                                style: Appstyles.font14WhiteBold
-                              ))
+                              child: Text(Constants.addtocart,
+                                  style: Appstyles.font14WhiteBold))
                         ],
                       )
                     ],

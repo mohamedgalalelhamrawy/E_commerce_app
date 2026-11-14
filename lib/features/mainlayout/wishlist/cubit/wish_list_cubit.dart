@@ -1,21 +1,28 @@
 import 'package:bloc/bloc.dart';
 import 'package:e_commerce_app/core/failures/failures.dart';
 import 'package:e_commerce_app/domain/entities/wishlist/add_to_wishlist_entity.dart';
+import 'package:e_commerce_app/domain/entities/wishlist/get_products_wishlist_entity.dart';
 import 'package:e_commerce_app/domain/usecases/wishlist/add_product_to_wishlist_use_case.dart';
+import 'package:e_commerce_app/domain/usecases/wishlist/get_products_wishlist_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 part 'wish_list_state.dart';
+
 @injectable
 class WishListCubit extends Cubit<WishListState> {
-  WishListCubit({required this.addProductToWishlistUseCase})
+  WishListCubit(
+      {required this.addProductToWishlistUseCase,
+      required this.getProductsWishlistUseCase})
       : super(WishListInitial());
   AddProductToWishlistUseCase addProductToWishlistUseCase;
-  List<String> WishListprductIDs=[];
-  bool isFavorite(String productID){
+  GetProductsWishlistUseCase getProductsWishlistUseCase;
+  List<String> WishListprductIDs = [];
+  bool isFavorite(String productID) {
     return WishListprductIDs.contains(productID);
   }
+
   ///////////// add prod
   void addProductToWishlist(String productID) async {
     emit(AddProductToWishLishLoadingState());
@@ -23,10 +30,24 @@ class WishListCubit extends Cubit<WishListState> {
     return either.fold(
         (failure) => emit(AddProductToWishLishErrorState(failures: failure)),
         (addprod) {
-          WishListprductIDs.add(productID);
-          emit(AddProductToWishLishSucessState(addToWishlistResponseEntity: addprod));
-        } );
+      WishListprductIDs.add(productID);
+      emit(AddProductToWishLishSucessState(
+          addToWishlistResponseEntity: addprod));
+    });
   }
-  ///// object 
-   static WishListCubit get(context) => BlocProvider.of<WishListCubit>(context);
+
+  ///// object
+  static WishListCubit get(context) => BlocProvider.of<WishListCubit>(context);
+  ////////// get Prods
+  void getProductsOfWishList() async {
+    emit(getProductsOfWishListLoadingState());
+    var either = await getProductsWishlistUseCase.invoke();
+    return either.fold((failure) {
+      emit(getProductsOfWishListErrorState(failures: failure));
+    }, (getProds) {
+      WishListprductIDs = getProds.data!.map((e) => e.id ?? '').toList();
+      emit(getProductsOfWishListSuccessState(
+          getWishlistResponseEntity: getProds));
+    });
+  }
 }

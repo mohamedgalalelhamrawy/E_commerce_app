@@ -3,7 +3,8 @@
 import 'package:e_commerce_app/core/failures/failures.dart';
 import 'package:e_commerce_app/domain/entities/wishlist/add_to_wishlist_entity.dart';
 import 'package:e_commerce_app/domain/repository/wishlist_repository.dart';
-
+import 'package:injectable/injectable.dart';
+@injectable
 class RemoveProdFromWishlistUseCase {
   WishlistRepository wishlistRepository;
   RemoveProdFromWishlistUseCase({required this.wishlistRepository});

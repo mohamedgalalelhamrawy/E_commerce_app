@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
               create: (context) => sl<CartCubit>(),
             ),
              BlocProvider<WishListCubit>(
-              create: (context) => sl<WishListCubit>(),
+              create: (context) => sl<WishListCubit>()..getProductsOfWishList(),
             ),
           ],
           child: MaterialApp(

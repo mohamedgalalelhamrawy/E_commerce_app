@@ -51,6 +51,10 @@ import '../../domain/usecases/login_use_case.dart' as _i210;
 import '../../domain/usecases/register_use_case.dart' as _i502;
 import '../../domain/usecases/wishlist/add_product_to_wishlist_use_case.dart'
     as _i1028;
+import '../../domain/usecases/wishlist/get_products_wishlist_use_case.dart'
+    as _i121;
+import '../../domain/usecases/wishlist/remove_prod_from_wishlist_use_case.dart'
+    as _i771;
 import '../../features/auth/cubit/cubit/auth_cubit.dart' as _i490;
 import '../../features/cartshopping/cubit/cart_cubit.dart' as _i771;
 import '../../features/mainlayout/home.dart/cubit/cubit/home_cubit.dart'
@@ -126,11 +130,19 @@ _i174.GetIt init(
   gh.factory<_i1028.AddProductToWishlistUseCase>(() =>
       _i1028.AddProductToWishlistUseCase(
           wishlistRepository: gh<_i325.WishlistRepository>()));
+  gh.factory<_i121.GetProductsWishlistUseCase>(() =>
+      _i121.GetProductsWishlistUseCase(
+          wishlistRepository: gh<_i325.WishlistRepository>()));
+  gh.factory<_i771.RemoveProdFromWishlistUseCase>(() =>
+      _i771.RemoveProdFromWishlistUseCase(
+          wishlistRepository: gh<_i325.WishlistRepository>()));
   gh.factory<_i490.RegisterCubit>(() => _i490.RegisterCubit(
         gh<_i502.RegisterUseCase>(),
         gh<_i210.LoginUseCase>(),
       ));
   gh.factory<_i255.WishListCubit>(() => _i255.WishListCubit(
-      addProductToWishlistUseCase: gh<_i1028.AddProductToWishlistUseCase>()));
+        addProductToWishlistUseCase: gh<_i1028.AddProductToWishlistUseCase>(),
+        getProductsWishlistUseCase: gh<_i121.GetProductsWishlistUseCase>(),
+      ));
   return getIt;
 }
