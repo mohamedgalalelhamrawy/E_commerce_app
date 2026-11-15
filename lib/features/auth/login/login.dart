@@ -42,6 +42,8 @@ class LoginScreen extends StatelessWidget {
             title: "success",
             posAction: () {
               SharedPreferencesUtils.savedata(key:"token", value: state.registerResponseEntity.token);
+              SharedPreferencesUtils.savedata(key: 'name', value: state.registerResponseEntity.user?.name);
+              SharedPreferencesUtils.savedata(key: 'email', value: state.registerResponseEntity.user?.email);
               Navigator.pushReplacementNamed(context, Routes.mainlayoutSCreen);
             },
           );

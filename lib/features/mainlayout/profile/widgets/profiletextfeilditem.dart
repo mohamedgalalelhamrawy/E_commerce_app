@@ -4,7 +4,7 @@ import 'package:e_commerce_app/features/auth/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ProfileTextFeild extends StatefulWidget {
+class ProfileTextFeild extends StatelessWidget {
   ProfileTextFeild(
       {super.key,
       required this.value,
@@ -16,12 +16,6 @@ class ProfileTextFeild extends StatefulWidget {
   final String text;
   final bool ispassword;
 
-  @override
-  State<ProfileTextFeild> createState() => _ProfileTextFeildState();
-}
-
-class _ProfileTextFeildState extends State<ProfileTextFeild> {
-  bool isReadOnly = true;
   final FocusNode passwordFocusNode = FocusNode();
 
   @override
@@ -31,7 +25,7 @@ class _ProfileTextFeildState extends State<ProfileTextFeild> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          widget.text,
+          text,
           style: Appstyles.font18darkprimaryBold,
         ),
         SizedBox(
@@ -44,9 +38,9 @@ class _ProfileTextFeildState extends State<ProfileTextFeild> {
           style:  Appstyles.font14darkprimaryBold.copyWith(overflow: TextOverflow.ellipsis),
           focusNode: passwordFocusNode,
           obscuringCharacter: '*',
-          obscureText: widget.obscuretext,
-          initialValue: widget.value,
-          readOnly: isReadOnly,
+          obscureText: obscuretext,
+          initialValue: value,
+          readOnly: true,
           decoration: InputDecoration(
             contentPadding:
                 EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
@@ -54,18 +48,18 @@ class _ProfileTextFeildState extends State<ProfileTextFeild> {
               borderRadius: BorderRadius.circular(15.r),
               borderSide: BorderSide(color: Appcolors.opacityblue),
             ),
-            suffixIcon: IconButton(
-              icon: const Icon(Icons.edit_outlined),
-              onPressed: () {
-                setState(() {
-                  isReadOnly = !isReadOnly;
-                  if (widget.ispassword) {
-                    widget.obscuretext = !widget.obscuretext;
-                  }
-                });
-                FocusScope.of(context).requestFocus(passwordFocusNode);
-              },
-            ),
+            // suffixIcon: IconButton(
+            //   icon: const Icon(Icons.edit_outlined),
+            //   onPressed: () {
+            //     setState(() {
+            //       isReadOnly = !isReadOnly;
+            //       if (widget.ispassword) {
+            //         widget.obscuretext = !widget.obscuretext;
+            //       }
+            //     });
+            //     FocusScope.of(context).requestFocus(passwordFocusNode);
+            //   },
+            // ),
           ),
         ),
         SizedBox(

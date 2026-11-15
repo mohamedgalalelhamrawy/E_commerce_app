@@ -78,6 +78,8 @@ class Mainlayout extends StatelessWidget {
                               posActionTitle: "yes",
                               posAction: () async{
                                 await SharedPreferencesUtils.removeData(key: "token");
+                                await SharedPreferencesUtils.removeData(key: 'name');
+                                await SharedPreferencesUtils.removeData(key: 'email');
                                 Navigator.pushNamedAndRemoveUntil(context,
                                     Routes.loginScreen, (route) => false);
                               });
