@@ -48,9 +48,9 @@ class Customproductsitem extends StatelessWidget {
                       return InkWell(
                         onTap: () {
                           if(isFavorite){
-                            return null;
+                            WishListCubit.get(context).removeProdFromWishList(productResponseEntity.id!);
                           }else{
-                            WishListCubit.get(context).addProductToWishlist(productResponseEntity.id!);
+                            WishListCubit.get(context).addProductToWishlist(productResponseEntity.id!,productResponseEntity);
                           }
                         },
                         child: Container(

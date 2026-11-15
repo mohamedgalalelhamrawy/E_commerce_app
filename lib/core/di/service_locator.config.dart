@@ -143,6 +143,8 @@ _i174.GetIt init(
   gh.factory<_i255.WishListCubit>(() => _i255.WishListCubit(
         addProductToWishlistUseCase: gh<_i1028.AddProductToWishlistUseCase>(),
         getProductsWishlistUseCase: gh<_i121.GetProductsWishlistUseCase>(),
+        removeProdFromWishlistUseCase:
+            gh<_i771.RemoveProdFromWishlistUseCase>(),
       ));
   return getIt;
 }

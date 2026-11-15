@@ -29,3 +29,17 @@ class getProductsOfWishListSuccessState extends WishListState {
   GetWishlistResponseEntity getWishlistResponseEntity;
   getProductsOfWishListSuccessState({required this.getWishlistResponseEntity});
 }
+
+//////// remove prod
+class RemoveProductFromWishListLoadingState extends WishListState {}
+
+class RemoveProductFromWishListErrorState extends WishListState {
+  final Failures failures;
+  RemoveProductFromWishListErrorState({required this.failures});
+}
+
+class RemoveProductFromWishListSuccessState extends WishListState {
+  final AddToWishlistResponseEntity addToWishlistResponseEntity;
+  RemoveProductFromWishListSuccessState({required this.addToWishlistResponseEntity});
+}
+class WishlistUpdateState extends WishListState{}

@@ -68,10 +68,10 @@ class WishListItem extends StatelessWidget {
                                   return InkWell(
                                     onTap: () {
                                       if (isFavorite) {
-                                        return null;
+                                         WishListCubit.get(context).removeProdFromWishList(productResponseEntity.id!);
                                       } else {
                                         WishListCubit.get(context)
-                                            .addProductToWishlist(productResponseEntity.id!);
+                                            .addProductToWishlist(productResponseEntity.id!,productResponseEntity);
                                       }
                                     },
                                     child: Container(

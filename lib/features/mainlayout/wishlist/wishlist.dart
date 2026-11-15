@@ -19,35 +19,25 @@ class _WishlistScreenState extends State<WishlistScreen> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: BlocListener<CartCubit, CartState>(
-              listener: (context, state) {
-                debugPrint("CART LISTENER: //${state.runtimeType}");
-                if (state is AddProductToCartLoadingState) {
-                  DialogUtils.showLoading(
-                      context: context, message: "...Loading");
-                } else if (state is AddProductToCartSuccessState) {
-                  DialogUtils.hideLoading(context);
-                  DialogUtils.showMessage(
-                      context: context,
-                      message: state.addProductToCartResponseEntity.message
-                          .toString());
-                } else if (state is AddProductToCartErrorState) {
-                  DialogUtils.hideLoading(context);
-                  DialogUtils.showMessage(
-                      context: context, message: state.failures.errmessage);
-               }
+        listener: (context, state) {
+          debugPrint("CART LISTENER: //${state.runtimeType}");
+          if (state is AddProductToCartLoadingState) {
+            DialogUtils.showLoading(context: context, message: "...Loading");
+          } else if (state is AddProductToCartSuccessState) {
+            DialogUtils.hideLoading(context);
+            DialogUtils.showMessage(
+                context: context,
+                message:
+                    state.addProductToCartResponseEntity.message.toString());
+          } else if (state is AddProductToCartErrorState) {
+            DialogUtils.hideLoading(context);
+            DialogUtils.showMessage(
+                context: context, message: state.failures.errmessage);
+          }
         },
         child: BlocBuilder<WishListCubit, WishListState>(
           builder: (context, state) {
-            if (state is getProductsOfWishListSuccessState) {
-              return ListView.builder(
-                itemCount: state.getWishlistResponseEntity.data!.length,
-                itemBuilder: (context, index) {
-                  return WishListItem(
-                      productResponseEntity:
-                          state.getWishlistResponseEntity.data![index]);
-                },
-              );
-            } else if (state is getProductsOfWishListErrorState) {
+            if (state is getProductsOfWishListErrorState) {
               return Center(
                 child: Text(state.failures.errmessage),
               );
@@ -55,8 +45,20 @@ class _WishlistScreenState extends State<WishlistScreen> {
               return Center(
                 child: CircularProgressIndicator(),
               );
+            }
+            var cubit = WishListCubit.get(context);
+            if (cubit.wishlistProducts.isEmpty) {
+              return Center(
+                child: Text("no WishList Products"),
+              );
             } else {
-              return SizedBox();
+              return ListView.builder(
+                itemCount: cubit.wishlistProducts.length,
+                itemBuilder: (context, index) {
+                  return WishListItem(
+                      productResponseEntity: cubit.wishlistProducts[index]);
+                },
+              );
             }
           },
         ),
