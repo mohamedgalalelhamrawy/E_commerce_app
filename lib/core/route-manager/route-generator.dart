@@ -2,6 +2,7 @@ import 'package:e_commerce_app/core/route-manager/routes.dart';
 import 'package:e_commerce_app/features/auth/login/login.dart';
 import 'package:e_commerce_app/features/auth/register/signup.dart';
 import 'package:e_commerce_app/features/cartshopping/cartshoppingscreen.dart';
+import 'package:e_commerce_app/features/categorydetails/category_details.dart';
 import 'package:e_commerce_app/features/mainlayout/wishlist/wishlist.dart';
 import 'package:e_commerce_app/features/mainlayout/mainlayout.dart';
 import 'package:e_commerce_app/features/productdetails.dart/productdetails.dart';
@@ -23,6 +24,8 @@ class RouteGenerator {
       return MaterialPageRoute(builder: (_) => ProductDetails(),settings: settings);
       case Routes.cartShopscreen :
       return MaterialPageRoute(builder: (_) => Cartshoppingscreen());
+      case Routes.categoryDetails :
+      return MaterialPageRoute(builder: (_) => CategoryDetails());
       default: undefinedRoute();
     }
   }
